@@ -44,7 +44,7 @@
 #results-page {
   display: flex;
   margin-top: 50px;
-  display: none;
+  /* display: none; */
 }
 
 #results-container {
@@ -87,19 +87,36 @@
 
 #pick-history {
   display: flex;
+  align-items: center;
+  flex-direction: column;
   margin-top: 300px;
+  margin-right: 20px;
+  margin-left: 20px;
   font-size: 200%;
   max-width: 200px;
   min-width: 200px;
+}
+
+#pick-history h1 {
+  margin-bottom: 10px;
+}
+
+.history-btn {
+  display: flex;
+  width: 100%;
+  text-align: center;
 }
 
 .custom-card {
   margin-bottom: 10px;
 }
 
+/*----- Learn More Page ----- */
+
 #learn-more {
   margin: 10px;
   display: flex;
+  display: none;
   justify-content: center;
 }
 
