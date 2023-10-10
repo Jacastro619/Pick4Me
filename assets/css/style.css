@@ -77,7 +77,8 @@
   font-size: 100%;
 }
 
-.continue-btns {
+.continue-btns,
+.button {
   display: flex;
   justify-content: end;
   padding: 10px;
