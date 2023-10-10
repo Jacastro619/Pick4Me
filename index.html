@@ -4,15 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pick4Me</title>
-    <link rel="stylesheet" href="./assets/css/style.css" />
     <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
     />
+    <link rel="stylesheet" href="./assets/css/style.css" />
   </head>
   <body>
+    <!-- -------------------Home page-------------------------------     -->
     <div id="home-page" class="home-page">
-        <h1 class="app-name">Pick4Me</h1>
+        <h1 class="app-name"><img src="./assets/images/logo2.png"/>Pick4Me</h1>
         <div>
           <img src="./assets/images/logo.png" alt="Picture of the Application Logo" class="logoimg">
         </div>
@@ -49,67 +50,80 @@
         </form>
       </div>
 <!-- -------------------results page-------------------------------     -->
-
-<div id="results-page">
-      <button class="button custom-result-btn">Go Back</button>
+<button class="button">Go Back</button>
+    <div id="results-page">
       <div id="pick-history"><h1>Pick History</h1></div>
     <div id="results-container">
       <div id="results-content1">
-        <div class="card">
-          <div class="card-content">
+        <div class="card custom-card">
+          <div class="card-content card-1">
             <div class="content">
               <h1>Restaurant Name</h1>
-              <h2>This is your number 1st pick!</h2>
+              <h2>This is your 1st pick!</h2>
+            </div>
+          </div>
+          <div class="continue-btns">
+            <button class="button">Learn More</button>
+            <button class="button">Directions</button>
+          </div>
+        </div>
+      </div>
+        <div id="results-content2">
+          <div class="card custom-card">
+            <div class="card-content custom-content">
+              <div class="content">
+                <h1>Restaurant Name</h1>
+                <h2>This is your 2nd pick!</h2>
+              </div>
+            </div>
+            <div class="continue-btns">
+              <button class="button">Learn More</button>
+              <button class="button">Directions</button>
+            </div>
+          </div>
+        </div>
+        <div id="results-content3">
+          <div class="card custom-card">
+            <div class="card-content custom-content">
+              <div class="content">
+                <h1>Restaurant Name</h1>
+                <h2>This is your 3rd pick!</h2>
+              </div>
+            </div>
+            <div class="continue-btns">
+              <button class="button">Learn More</button>
+              <button class="button">Directions</button>
+            </div>
+          </div>
+        </div>
+        <div id="results-content4">
+          <div class="card custom-card">
+            <div class="card-content custom-content">
+              <div class="content">
+                <h1>Restaurant Name</h1>
+                <h2>This is your 4th pick!</h2>
+              </div>
+            </div>
+            <div class="continue-btns">
+              <button class="button">Learn More</button>
+              <button class="button">Directions</button>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div id="results-content2">
-      <div class="card">
-        <div class="card-content">
-          <div class="content">
-            <h1>Restaurant Name</h1>
-            <h2>This is your number 2nd pick!</h2>
-          </div>
-        </div>
-      </div>
     </div>
-    <div id="results-content3">
-      <div class="card">
+    <div id="learn-more">
+      <button class="go-back-btn">Go Back</button>
+      <div class="card m-6 p-5">
         <div class="card-content">
-          <div class="content">
-            <h1>Restaurant Name</h1>
-            <h2>This is your number 3rd pick!</h2>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div id="results-content4">
-      <div class="card">
-        <div class="card-content">
-          <div class="content">
-            <h1>Restaurant Name</h1>
-            <h2>This is your number 4th pick!</h2>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  </div>
-  <div id="learn-more">
-    <button class="go-back-btn">Go Back</button>
-    <div class="card m-6">
-      <div class="card-content">
-        <h1>Restaurant Name:</h1>
-        <div id="image">
-          <img id="3-restaurant-image" src="" alt="restaurant-img">
-          <div class="content">
-            <div class="info-container">
-              <h3 class="3-rating">Star Rating:</h3>
-              <h3 class="3-address">Address:</h3>
-              <h3 class="3-recent-rating">Most Recent Star Rating:</h3>
-              <h3 class="3-price">Price Rating:</h3>
+          <div id="results-content">
+            <div class="content">
+              <img id="3-restaurant-image" src="#" alt="restaurant-img">
+              <p class="3-rating"></p>
+              <address class="3-address"></address>
+              <p class="3-recent-rating"></p>
+              <p class="3-price"></p>
             </div>
             <button class="three-get-dir">Get Directions</button>
           </div>
@@ -117,7 +131,10 @@
       </div>
     </div>
   </div>
+<!-- -------------------Map page--------------------------------------     -->
   <div id="map-page"></div>
+
+<!-- -------------------script.js-------------------------------------     -->
   <script src="./assets/js/script.js"></script>
 </body>
 
