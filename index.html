@@ -50,8 +50,8 @@
         </form>
       </div>
 <!-- -------------------results page-------------------------------     -->
-<button class="button">Go Back</button>
-    <div id="results-page">
+<div id="results-page">
+      <button class="button custom-result-btn">Go Back</button>
       <div id="pick-history"><h1>Pick History</h1></div>
     <div id="results-container">
       <div id="results-content1">
@@ -115,17 +115,19 @@
     </div>
     <div id="learn-more">
       <button class="go-back-btn">Go Back</button>
-      <div class="card m-6 p-5">
+      <div class="card m-6">
         <div class="card-content">
-          <div id="results-content">
+          <h1>Restaurant Name:</h1>
+          <div id="image">
+            <img id="3-restaurant-image" src="" alt="restaurant-img">
             <div class="content">
-              <img id="3-restaurant-image" src="#" alt="restaurant-img">
-              <p class="3-rating"></p>
-              <address class="3-address"></address>
-              <p class="3-recent-rating"></p>
-              <p class="3-price"></p>
-            </div>
-            <button class="three-get-dir">Get Directions</button>
+              <div class="info-container">
+                <h3 class="3-rating">Star Rating:</h3>
+                <h3 class="3-address">Address:</h3>
+                <h3 class="3-recent-rating">Most Recent Star Rating:</h3>
+                <h3 class="3-price">Price Rating:</h3>
+              </div>
+              <button class="three-get-dir">Get Directions</button>
           </div>
         </div>
       </div>
