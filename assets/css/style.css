@@ -1,7 +1,7 @@
 /* ----- home page -----*/
 #home-page {
   display: flex;
-  /* display: none; */
+  display: none;
   flex-direction: column;
   align-items: center;
 }
@@ -44,6 +44,7 @@
 /*----- Results page ----- */
 #results-page {
     display: none;
+    /* display: block; */
 }
 
 #learn-more {
