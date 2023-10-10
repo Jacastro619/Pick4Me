@@ -1,7 +1,7 @@
 /* ----- home page -----*/
 #home-page {
   display: flex;
-  /* display: none; */
+  display: none;
   flex-direction: column;
   align-items: center;
 }
@@ -39,29 +39,16 @@
   border: 2px solid;
   z-index: 1;
 }
-#home-page {
-  display: none;
-}
-
-#learn-more {
-  display: none;
-}
-
-/*----- Results page ----- */
-#results-page {
-  display: none;
-}
-
-#learn-more {
-  display: none;
-}
 
 /*----- Results page ----- */
 #results-page {
   display: flex;
-  width: 100%;
   margin-top: 50px;
   /* display: none; */
+}
+
+#results-container {
+  width: 100%;
 }
 
 .custom-result-btn {
@@ -71,18 +58,42 @@
   font-size: 125%;
 }
 
-#learn-more {
-  margin: 10px;
+.custom-content,
+.card-1 {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
-#learn-more .card {
-  top: 90px;
+.card-1 {
+  height: 400px;
+}
+
+.content {
+  font-size: 150%;
+}
+
+.content h2 {
+  font-size: 100%;
+}
+
+.continue-btns {
   display: flex;
-  justify-content: center;
-  min-height: 600px;
-  min-width: 1000px;
+  justify-content: end;
+  padding: 10px;
+  margin: 5px;
+}
+
+#pick-history {
+  display: flex;
+  margin-top: 300px;
+  font-size: 200%;
+  max-width: 200px;
+  min-width: 200px;
+}
+
+.custom-card {
+  margin-bottom: 10px;
 }
 
 #learn-more .info-container {
@@ -97,20 +108,23 @@
   font-weight: 600;
 }
 
-.continue-btns .button {
-  margin: 5px;
-}
-
-#pick-history {
-  display: flex;
-  margin-top: 300px;
-  font-size: 200%;
-  max-width: 200px;
-  min-width: 200px;
-}
-
 .go-back-btn {
   position: absolute;
   top: 10px;
   left: 10px;
+}
+
+#learn-more {
+  margin: 10px;
+  display: flex;
+  display: none;
+  justify-content: center;
+}
+
+#learn-more .card {
+  top: 90px;
+  display: flex;
+  justify-content: center;
+  min-height: 600px;
+  min-width: 1000px;
 }
