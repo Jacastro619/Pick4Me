@@ -23,8 +23,8 @@
 }
 
 .one-input {
-    width: 80%;
-    padding: 15px;
+  width: 80%;
+  padding: 15px;
 }
 /*----- app logo ----- */
 
@@ -43,57 +43,52 @@
 
 /*----- Results page ----- */
 #results-page {
-  display: flex;
-  width: 100%;
-  margin-top: 50px;
-}
-
-#results-container {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-.custom-content,
-.card-1 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.card-1 {
-  height: 400px;
-}
-
-.content {
-  font-size: 150%;
-}
-
-.content h2 {
-  font-size: 100%;
-}
-
-.continue-btns {
-  display: flex;
-  justify-content: end;
-  padding: 10px;
-}
-
-.continue-btns .button {
-  margin: 5px;
-}
-
-#pick-history {
-  display: flex;
-  font-size: 200%;
-  max-width: 200px;
-  min-width: 200px;
-}
-
-.custom-card {
-  margin-bottom: 10px;
+    display: none;
 }
 
 #learn-more {
-  display: none;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+#learn-more .card {
+    top: 90px;
+    display: flex;
+    justify-content: center;
+    min-height: 600px;
+    min-width: 1000px;
+}
+
+#learn-more .info-container {
+    position: absolute;
+    bottom: 43%;
+    left: 10px;
+}
+
+#learn-more h1 {
+    color: black;
+    font-size: 30px;
+    font-weight: 600;
+}
+
+#learn-more .info-container h3 {
+    margin: 10px;
+    font-size: 20px;
+    background-color: white;
+}
+
+#learn-more .three-get-dir {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    height: 90px;
+    width: 250px;
+    font-size: 20px;
+}
+
+.go-back-btn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
 }
