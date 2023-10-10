@@ -1,7 +1,9 @@
-.home-page {
+#home-page {
   display: flex;
+  display: none;
   flex-direction: column;
 }
+
 .app-name {
   text-align: center;
   font-size: 50px;
@@ -34,13 +36,6 @@
   border-color: black;
   border: 2px solid;
   z-index: 1;
-}
-#home-page {
-  display: none;
-}
-
-#learn-more {
-  display: none;
 }
 
 #results-page {
@@ -93,4 +88,8 @@
 
 .custom-card {
   margin-bottom: 10px;
+}
+
+#learn-more {
+  display: none;
 }
