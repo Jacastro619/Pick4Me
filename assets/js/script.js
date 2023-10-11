@@ -12,23 +12,29 @@ var mapBackBtn = $("#map-back");
 var addressInput = $("#one-input-address");
 var radiusInput = $("#one-input-radius");
 var foodInput = $("#one-input-food");
-var homeMsg = $("#home-msg")
+var homeMsg = $("#home-msg");
+var inputAlert = $(".custom-message");
+var closeAlertbtn = $(".close-alert");
 
-function displayHomeError(type, message){
+function closeAlert() {
+  $(inputAlert).addClass("hidden");
+}
+
+function displayHomeError(type, message) {
   homeMsg.textContent = message;
-  homeMsg.addClass("class", type)
+  homeMsg.addClass("class", type);
 }
 
 function showUserInput() {
-  var addressUser = localStorage.getItem("userAddress")
-  var radiusUser = localStorage.getItem("userRadius")
-  var foodUser = localStorage.getItem("userFood")
-  if (!addressUser || !radiusUser || foodUser){
+  var addressUser = localStorage.getItem("userAddress");
+  var radiusUser = localStorage.getItem("userRadius");
+  var foodUser = localStorage.getItem("userFood");
+  if (!addressUser || !radiusUser || foodUser) {
     return;
   }
 }
 
-function handleHomeForm(event){
+function handleHomeForm(event) {
   console.log("clicked - Saving home data to local storage");
   //event.preventDefault();
 
@@ -36,12 +42,8 @@ function handleHomeForm(event){
   var userRadius = $('input[name="one-input-radius"]').val();
   var userFood = $('input[name="one-input-food"]').val();
 
-  if (userAddress === ""){
-    displayHomeError("error", "Address cannot be blank"); 
-  } else if (userRadius === ""){
-    displayHomeError("error", "Mile radius cannot be blank");
-  } else if (userFood === ""){
-    displayHomeError("error", "food Category cannot be blank");
+  if (!userAddress || !userRadius || !userFood) {
+    inputAlert.removeClass("hidden");
   } else {
     homePageEl.addClass("hidden");
     resultsPageEl.removeClass("hidden");
@@ -51,10 +53,7 @@ function handleHomeForm(event){
   localStorage.setItem("userRadius", userRadius);
   localStorage.setItem("UserFood", userFood);
   showUserInput();
-  
-  
-  }
-
+}
 
 // var options = {
 //   headers: {
@@ -98,13 +97,9 @@ function handleHomeForm(event){
 //       });
 //   });
 
-$(resultBtn).on("click", toResultPage);
-
 function toResultPage() {
   console.log("works");
   handleHomeForm();
-  
-  
 }
 
 function BacktoHome() {
@@ -155,6 +150,8 @@ function toMapsPageFromLearnMore() {
   }, 250);
 }
 
+$(resultBtn).on("click", toResultPage);
+$(closeAlertbtn).on("click", closeAlert);
 $(document).on("click", ".continue-btn-lm", toLearnMorePage);
 $(document).on("click", ".continue-btn-d", toMapsPageFromResults);
 $(document).on("click", ".three-get-dir", toMapsPageFromLearnMore);

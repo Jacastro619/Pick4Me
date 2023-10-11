@@ -1,4 +1,10 @@
 /* ----- home page -----*/
+
+.custom-message {
+  position: absolute;
+  top: 5%;
+}
+
 #home-img {
   max-width: 500px;
 }
@@ -28,8 +34,7 @@
   display: none;
 } */
 
-
-label.checkbox{
+label.checkbox {
   padding: 5px;
   margin: 15px;
 }
