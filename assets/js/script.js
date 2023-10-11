@@ -8,6 +8,53 @@ var resultGoBackBtn = $("#result-go-back");
 var learnMoreBackBtn = $("#learn-more-back");
 var threeGetDir = $(".three-get-dir");
 var mapBackBtn = $("#map-back");
+//------home page ids
+var addressInput = $("#one-input-address");
+var radiusInput = $("#one-input-radius");
+var foodInput = $("#one-input-food");
+var homeMsg = $("#home-msg")
+
+function displayHomeError(type, message){
+  homeMsg.textContent = message;
+  homeMsg.addClass("class", type)
+}
+
+function showUserInput() {
+  var addressUser = localStorage.getItem("userAddress")
+  var radiusUser = localStorage.getItem("userRadius")
+  var foodUser = localStorage.getItem("userFood")
+  if (!addressUser || !radiusUser || foodUser){
+    return;
+  }
+}
+
+function handleHomeForm(event){
+  console.log("clicked - Saving home data to local storage");
+  //event.preventDefault();
+
+  var userAddress = $('input[name="one-input-address"]').val();
+  var userRadius = $('input[name="one-input-radius"]').val();
+  var userFood = $('input[name="one-input-food"]').val();
+
+  if (userAddress === ""){
+    displayHomeError("error", "Address cannot be blank"); 
+  } else if (userRadius === ""){
+    displayHomeError("error", "Mile radius cannot be blank");
+  } else if (userFood === ""){
+    displayHomeError("error", "food Category cannot be blank");
+  } else {
+    homePageEl.addClass("hidden");
+    resultsPageEl.removeClass("hidden");
+  }
+
+  localStorage.setItem("userAddress", userAddress);
+  localStorage.setItem("userRadius", userRadius);
+  localStorage.setItem("UserFood", userFood);
+  showUserInput();
+  
+  
+  }
+
 
 // var options = {
 //   headers: {
@@ -55,8 +102,9 @@ $(resultBtn).on("click", toResultPage);
 
 function toResultPage() {
   console.log("works");
-  homePageEl.addClass("hidden");
-  resultsPageEl.removeClass("hidden");
+  handleHomeForm();
+  
+  
 }
 
 function BacktoHome() {
