@@ -1,8 +1,7 @@
 /* ----- home page -----*/
 #home-img {
-    max-width: 500px;
+  max-width: 500px;
 }
-
 
 #home-page {
   display: flex;
@@ -159,6 +158,11 @@
 }
 
 /*----- Map Page ----- */
+
+#map-page {
+  display: block;
+  /* display: none; */
+}
 
 #form-container {
   display: flex;
