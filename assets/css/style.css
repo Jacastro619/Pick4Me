@@ -1,7 +1,7 @@
 /* ----- home page -----*/
 #home-page {
   display: flex;
-  display: none;
+  /* display: none; */
   flex-direction: column;
   align-items: center;
 }
@@ -29,8 +29,8 @@
 
 .logoimg {
   position: absolute;
-  top: 3%;
-  right: 3%;
+  top: 2%;
+  right: 2%;
   justify-content: left;
   width: 75px;
   height: 75px;
@@ -43,19 +43,17 @@
 /*----- Results page ----- */
 #results-page {
   display: flex;
-  margin-top: 50px;
-  /* display: none; */
+  margin-top: 100px;
+  display: none;
 }
 
 #results-container {
   width: 100%;
 }
 
-.custom-result-btn {
-  position: absolute;
-  top: 1%;
-  left: 1%;
-  font-size: 125%;
+#start-btn {
+  display: flex;
+  justify-content: center;
 }
 
 .custom-content,
@@ -66,7 +64,7 @@
 }
 
 .card-1 {
-  height: 400px;
+  height: 350px;
 }
 
 .content {
@@ -153,10 +151,4 @@
   height: 90px;
   width: 250px;
   font-size: 20px;
-}
-
-.go-back-btn {
-  position: absolute;
-  top: 10px;
-  left: 10px;
 }
