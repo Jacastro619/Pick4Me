@@ -85,23 +85,33 @@ label.checkbox{
   height: 350px;
 }
 
-.content {
+.card-content .content {
   font-size: 150%;
+  border-radius: 10px;
 }
 
 .content h2 {
+  border-radius: 5px;
+  text-align: center;
+  background-color: rgb(252, 250, 250, 0.7);
   font-size: 100%;
 }
 
-.continue-btns,
-.continue-btn {
+.continue-btns {
   display: flex;
   justify-content: end;
   padding: 10px;
   margin: 5px;
 }
 
-/*----- History page ----- */
+.continue-btn-lm,
+.continue-btn-d {
+  font-size: 20px;
+  background-color: rgb(252, 250, 250, 0.8);
+  color: black;
+  margin: 5px;
+}
+
 #pick-history {
   display: flex;
   align-items: center;
@@ -124,8 +134,20 @@ label.checkbox{
   text-align: center;
 }
 
-.custom-card {
-  margin-bottom: 10px;
+.custom-card-1 {
+  background-image: url(https://s3-media2.fl.yelpcdn.com/bphoto/XihZqv1Rdw1P5vuwCS66Kw/o.jpg);
+  background-size: cover;
+  margin-bottom: 20px;
+  margin-right: 20px;
+  box-shadow: 5px 5px 5px;
+}
+
+.custom-card-2,
+.custom-card-3,
+.custom-card-4 {
+  margin-bottom: 20px;
+  margin-right: 20px;
+  box-shadow: 5px 5px 5px;
 }
 
 /*----- Learn More Page ----- */
@@ -156,6 +178,11 @@ label.checkbox{
   left: 10px;
 }
 
+.info-container {
+  background-color: rgb(252, 250, 250, 0.7);
+  border-radius: 5px;
+}
+
 .learn-more h1 {
   color: black;
   font-size: 30px;
@@ -165,16 +192,27 @@ label.checkbox{
 .learn-more .info-container h3 {
   margin: 10px;
   font-size: 20px;
-  background-color: white;
 }
 
 .learn-more .three-get-dir {
   position: absolute;
+  background-color: rgba(255, 255, 255, 0.904);
+  border-radius: 10px;
   bottom: 10px;
   right: 10px;
-  height: 90px;
-  width: 250px;
   font-size: 20px;
+  padding: 10px;
+}
+
+.card-content h1 {
+  background-color: rgb(252, 250, 250, 0.7);
+  border-radius: 5px;
+}
+
+.custom-card-three {
+  border-radius: 10px;
+  box-shadow: 10px 10px 10px;
+  background-image: url(https://s3-media2.fl.yelpcdn.com/bphoto/XihZqv1Rdw1P5vuwCS66Kw/o.jpg);
 }
 
 /*----- Map Page ----- */
