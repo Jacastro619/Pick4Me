@@ -82,8 +82,6 @@ function toMapsPageFromResults() {
   resultsPageEl.addClass("hidden");
   mapPageEl.removeClass("hidden");
 
-  
-
   setTimeout(function () {
     L.mapquest.key = "4JE8n3QyoprYfpwIHorXiugDcOsYQNLv";
 
