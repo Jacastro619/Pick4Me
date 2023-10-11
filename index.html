@@ -26,7 +26,7 @@
           <img src="./assets/images/logo2.png" alt="Picture of the Application Logo" class="logoimg">
         </div>
 
-        <form class="box one-form-box">
+        <form id="form1" class="box one-form-box">
           <div class="field">
             <label class="label">Your Address:</label>
             <div class="control">
@@ -55,16 +55,16 @@
             </div>
           </div>
           <div id="start-btn">
-          <button id="one-btn-results" class="button is-primary" type="submit">Show me the Results</button>
+          <button id="one-btn-results" class="button is-primary" type="button">Show me the Results</button>
         </div>
         </form>
       </div>
 <!-- -------------------results page-------------------------------     -->
-<div id="results-page">
+<div class="results-page hidden">
   <div>
     <img src="./assets/images/logo.png" alt="Picture of the Application Logo" class="logoimg">
   </div>
-      <button class="button custom-result-btn">Go Back</button>
+      <button id="result-go-back" class="button custom-result-btn">Go Back</button>
       <div id="pick-history">
         <h1>Pick History</h1>
         <button class="button history-btn">Restaurant Name</button>
@@ -79,8 +79,8 @@
             </div>
           </div>
           <div class="continue-btns">
-            <button class="button">Learn More</button>
-            <button class="button">Directions</button>
+            <button class="button continue-btn-lm">Learn More</button>
+            <button class="button continue-btn-d">Directions</button>
           </div>
         </div>
       </div>
@@ -93,8 +93,8 @@
               </div>
             </div>
             <div class="continue-btns">
-              <button class="button">Learn More</button>
-              <button class="button">Directions</button>
+              <button class="button continue-btn-lm">Learn More</button>
+              <button class="button continue-btn-d">Directions</button>
             </div>
           </div>
         </div>
@@ -107,8 +107,8 @@
               </div>
             </div>
             <div class="continue-btns">
-              <button class="button">Learn More</button>
-              <button class="button">Directions</button>
+              <button class="button continue-btn-lm">Learn More</button>
+              <button class="button continue-btn-d">Directions</button>
             </div>
           </div>
         </div>
@@ -121,19 +121,19 @@
               </div>
             </div>
             <div class="continue-btns">
-              <button class="button">Learn More</button>
-              <button class="button">Directions</button>
+              <button class="button continue-btn-lm">Learn More</button>
+              <button class="button continue-btn-d">Directions</button>
             </div>
           </div>
         </div>
       </div>
     </div>
     </div>
-    <div id="learn-more">
+    <div class="learn-more hidden">
       <div>
         <img src="./assets/images/logo.png" alt="Picture of the Application Logo" class="logoimg">
       </div>
-      <button class="button custom-result-btn">Go Back</button>
+      <button id="learn-more-back" class="button custom-result-btn">Go Back</button>
       <div class="card m-6">
         <div class="card-content">
           <h1>Restaurant Name:</h1>
@@ -153,11 +153,11 @@
     </div>
   </div>
 <!-- -------------------Map page--------------------------------------     -->
-  <div id="map-page">
+  <div class="map-page hidden">
     <div>
       <img src="./assets/images/logo.png" alt="Picture of the Application Logo" class="logoimg">
     </div>
-    <button class="button custom-result-btn">Go Back</button>
+    <button id="map-back" class="button custom-result-btn">Go Back</button>
     <div id="form-container">
     <form class="box custom-box">
       <div class="field">
@@ -183,6 +183,7 @@
   </div>
 
 <!-- -------------------script.js-------------------------------------     -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script src="./assets/js/script.js"></script>
 </body>
 

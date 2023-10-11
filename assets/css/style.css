@@ -3,9 +3,8 @@
   max-width: 500px;
 }
 
-#home-page {
+.home-page {
   display: flex;
-  /* display: none; */
   flex-direction: column;
   align-items: center;
 }
@@ -45,10 +44,9 @@
 }
 
 /*----- Results page ----- */
-#results-page {
+.results-page {
   display: flex;
   margin-top: 100px;
-  display: none;
 }
 
 #results-container {
@@ -80,7 +78,7 @@
 }
 
 .continue-btns,
-.button {
+.continue-btn {
   display: flex;
   justify-content: end;
   padding: 10px;
@@ -115,14 +113,19 @@
 
 /*----- Learn More Page ----- */
 
-#learn-more {
+.learn-more {
   margin: 10px;
   display: flex;
-  display: none;
   justify-content: center;
 }
 
-#learn-more .card {
+.custom-result-btn {
+  position: absolute;
+  top: 1%;
+  left: 1%;
+}
+
+.learn-more .card {
   top: 90px;
   display: flex;
   justify-content: center;
@@ -130,25 +133,25 @@
   min-width: 1000px;
 }
 
-#learn-more .info-container {
+.learn-more .info-container {
   position: absolute;
   bottom: 43%;
   left: 10px;
 }
 
-#learn-more h1 {
+.learn-more h1 {
   color: black;
   font-size: 30px;
   font-weight: 600;
 }
 
-#learn-more .info-container h3 {
+.learn-more .info-container h3 {
   margin: 10px;
   font-size: 20px;
   background-color: white;
 }
 
-#learn-more .three-get-dir {
+.learn-more .three-get-dir {
   position: absolute;
   bottom: 10px;
   right: 10px;
@@ -159,9 +162,8 @@
 
 /*----- Map Page ----- */
 
-#map-page {
+.map-page {
   display: block;
-  display: none;
 }
 
 #form-container {
@@ -183,4 +185,8 @@
 
 .custom-box {
   width: 60%;
+}
+
+.hidden {
+  display: none;
 }
