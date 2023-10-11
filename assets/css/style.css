@@ -60,6 +60,12 @@
   justify-content: center;
 }
 
+.custom-result-btn {
+  position: absolute;
+  top: 1%;
+  left: 1%;
+}
+
 .custom-content,
 .card-1 {
   display: flex;
@@ -80,7 +86,7 @@
 }
 
 .continue-btns,
-.button {
+.continue-btn {
   display: flex;
   justify-content: end;
   padding: 10px;
@@ -167,6 +173,7 @@
 #form-container {
   display: flex;
   justify-content: center;
+  margin-top: 20px;
 }
 
 #map-container {
