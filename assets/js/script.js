@@ -59,14 +59,30 @@ function toResultPage() {
   resultsPageEl.removeClass("hidden");
 }
 
+function BacktoHome() {
+  homePageEl.removeClass("hidden");
+  resultsPageEl.addClass("hidden");
+}
+
 function toLearnMorePage() {
   resultsPageEl.addClass("hidden");
   learnMorePageEl.removeClass("hidden");
+}
+function backToResults() {
+  resultsPageEl.removeClass("hidden");
+  learnMorePageEl.addClass("hidden");
+}
+
+function MapstoResults() {
+  resultsPageEl.removeClass("hidden");
+  mapPageEl.addClass("hidden");
 }
 
 function toMapsPageFromResults() {
   resultsPageEl.addClass("hidden");
   mapPageEl.removeClass("hidden");
+
+  
 
   setTimeout(function () {
     L.mapquest.key = "4JE8n3QyoprYfpwIHorXiugDcOsYQNLv";
@@ -96,3 +112,6 @@ function toMapsPageFromLearnMore() {
 $(document).on("click", ".continue-btn-lm", toLearnMorePage);
 $(document).on("click", ".continue-btn-d", toMapsPageFromResults);
 $(document).on("click", ".three-get-dir", toMapsPageFromLearnMore);
+$(resultGoBackBtn).on("click", BacktoHome);
+$(learnMoreBackBtn).on("click", backToResults);
+$(mapBackBtn).on("click", MapstoResults);
