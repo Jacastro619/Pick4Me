@@ -5,7 +5,7 @@
 
 #home-page {
   display: flex;
-  display: none;
+  /* display: none; */
   flex-direction: column;
   align-items: center;
 }
@@ -161,7 +161,7 @@
 
 #map-page {
   display: block;
-  /* display: none; */
+  display: none;
 }
 
 #form-container {
