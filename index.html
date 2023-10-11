@@ -8,6 +8,12 @@
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
     />
+    <script src="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.js"></script>
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.css"
+    />
     <link rel="stylesheet" href="./assets/css/style.css" />
   </head>
   <body>
@@ -22,13 +28,13 @@
           <div class="field">
             <label class="label">Your Address:</label>
             <div class="control">
-              <input id="one-input-address" class="input one-input" type="address" placeholder="Enter your address">
+              <input id="one-input-address" class="input one-input" type="text" placeholder="Enter your address">
             </div>
           </div>
           <div class="field">
             <label class="label">Max Search Radius</label>
             <div class="control">
-              <input id="one-input-radius" class="input one-input" type="radius" placeholder="enter mile radius">
+              <input id="one-input-radius" class="input one-input" type="text" placeholder="enter mile radius">
             </div>
           </div>
           <p class="label"> What Price Range:</p>
@@ -43,11 +49,11 @@
           <div class="field">
             <label class="label">Food Category:</label>
             <div class="control">
-              <input id="one-input-food" class="input one-input" type="food-type" placeholder="What kind of food?">
+              <input id="one-input-food" class="input one-input" type="text" placeholder="What kind of food?">
             </div>
           </div>
           <div id="start-btn">
-          <button id="one-btn-results" class="button is-primary">Show me the Results</button>
+          <button id="one-btn-results" class="button is-primary" type="submit">Show me the Results</button>
         </div>
         </form>
       </div>
@@ -145,7 +151,34 @@
     </div>
   </div>
 <!-- -------------------Map page--------------------------------------     -->
-  <div id="map-page"></div>
+  <div id="map-page">
+    <div>
+      <img src="./assets/images/logo.png" alt="Picture of the Application Logo" class="logoimg">
+    </div>
+    <button class="button custom-result-btn">Go Back</button>
+    <div id="form-container">
+    <form class="box custom-box">
+      <div class="field">
+        <label class="label">Starting Address:</label>
+        <div class="control">
+          <input class="input" type="text">
+        </div>
+      </div>
+    
+      <div class="field">
+        <label class="label">Restaurant Address:</label>
+        <div class="control">
+          <input class="input" type="text">
+        </div>
+      </div>
+    
+      <button class="button is-primary" type="submit">Show Route</button>
+    </form>
+  </div>
+  <div id="map-container">
+    <div id="map" style="width: 900px; height: 530px"></div>
+  </div>
+  </div>
 
 <!-- -------------------script.js-------------------------------------     -->
   <script src="./assets/js/script.js"></script>

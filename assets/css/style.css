@@ -1,7 +1,7 @@
 /* ----- home page -----*/
 #home-page {
   display: flex;
-  /* display: none; */
+  display: none;
   flex-direction: column;
   align-items: center;
 }
@@ -151,4 +151,27 @@
   height: 90px;
   width: 250px;
   font-size: 20px;
+}
+
+/*----- Map Page ----- */
+
+#form-container {
+  display: flex;
+  justify-content: center;
+}
+
+#map-container {
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+#map {
+  border: 2px solid gray;
+  border-radius: 10px;
+  box-shadow: 10px 10px 20px;
+}
+
+.custom-box {
+  width: 60%;
 }
