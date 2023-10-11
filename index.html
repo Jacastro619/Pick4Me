@@ -26,31 +26,34 @@
 
         <form class="box one-form-box">
           <div class="field">
-            <label class="label">Your Address:</label>
+            <label class="label">Your Address:
             <div class="control">
               <input id="one-input-address" class="input one-input" type="text" placeholder="Enter your address">
             </div>
+            </label>
           </div>
           <div class="field">
-            <label class="label">Max Search Radius</label>
+            <label class="label">Max Search Radius
             <div class="control">
               <input id="one-input-radius" class="input one-input" type="text" placeholder="enter mile radius">
             </div>
+            </label>
           </div>
           <p class="label"> What Price Range:</p>
-          <label class="checkbox">
-            <input type="checkbox"> $ </label>
-          <label class="checkbox">
-            <input type="checkbox"> $$ </label>
-          <label class="checkbox">
-            <input type="checkbox"> $$$ </label>
-          <label class="checkbox">
-            <input type="checkbox"> $$$$ </label>
+          <label class="checkbox" for="cb1">
+            <input type="checkbox" id="cb1" value="$"> $ </label>
+          <label class="checkbox" for="cb2">
+            <input type="checkbox" id="cb2" value="$$"> $$ </label>
+          <label class="checkbox" for="cb3">
+            <input type="checkbox" id="cb3" value="$$$"> $$$ </label>
+          <label class="checkbox" for="cb4">
+            <input type="checkbox" id="cb4" value="$$$$"> $$$$ </label>
           <div class="field">
-            <label class="label">Food Category:</label>
+            <label class="label">Food Category:
             <div class="control">
               <input id="one-input-food" class="input one-input" type="text" placeholder="What kind of food?">
             </div>
+            </label>
           </div>
           <div id="start-btn">
           <button id="one-btn-results" class="button is-primary" type="submit">Show me the Results</button>
@@ -159,17 +162,19 @@
     <div id="form-container">
     <form class="box custom-box">
       <div class="field">
-        <label class="label">Starting Address:</label>
+        <label class="label">Starting Address:
         <div class="control">
           <input class="input" type="text">
         </div>
+      </label>
       </div>
     
       <div class="field">
-        <label class="label">Restaurant Address:</label>
+        <label class="label">Restaurant Address:
         <div class="control">
           <input class="input" type="text">
         </div>
+        </label>
       </div>
     
       <button class="button is-primary" type="submit">Show Route</button>
