@@ -32,6 +32,8 @@ var lmReview3 = $("#lm-3");
 var lmReview4 = $("#lm-4");
 
 var learnMoreBtn = $(".continue-btn-lm");
+var historyEl = $("#pick-history");
+var dataArray = [];
 
 // var cb1 = $("#cb1");
 // var cb2 = $("#cb2");
@@ -83,6 +85,28 @@ var options = {
       "Bearer cpIZVMVOeEQWNK3YQtqsptY8MgVpErO4syU6mpNzUmDE26gJwG34Z6GVQHXpl-mg_v0ZneUmCS3qtJPVNB6n9r-lXzl9CsVAtIgyiqW-Wkb5z9ZAQRtrrq_qE_khZXYx",
   },
 };
+
+renderHistory();
+
+function renderHistory() {
+  var rawHistoryArray = localStorage.getItem("dataArray");
+  if (rawHistoryArray === null) {
+    dataArray = [];
+  } else {
+    dataArray = JSON.parse(rawHistoryArray);
+    for (let i = 0; i < dataArray.length; i++) {
+      var histBtn = $("<button>");
+      histBtn.text(dataArray[i]);
+      histBtn.attr({
+        id: `history-btn${i}`,
+        type: "button",
+        style: "display: flex; width: 100%; text-align: center;",
+        class: "button",
+      });
+      historyEl.append(histBtn);
+    }
+  }
+}
 
 function closeAlert() {
   $(inputAlert).addClass("hidden");
@@ -145,6 +169,12 @@ function fetchSearch() {
       if (data.businesses.length < 4) {
         alert("error caught");
       } else {
+        if (dataArray.includes(data.businesses[0].name)) {
+        } else {
+          dataArray.push(data.businesses[0].name);
+          console.log(dataArray);
+          localStorage.setItem("dataArray", JSON.stringify(dataArray));
+        }
         homePageEl.addClass("hidden");
         resultsPageEl.removeClass("hidden");
         console.log(data);
