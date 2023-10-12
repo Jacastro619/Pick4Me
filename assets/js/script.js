@@ -473,4 +473,55 @@ $("#pm-2").on("click", toMapsPageFromResults2);
 $("#pm-3").on("click", toMapsPageFromResults3);
 $("#pm-4").on("click", toMapsPageFromResults4);
 
+L.mapquest.key = "4JE8n3QyoprYfpwIHorXiugDcOsYQNLv";
+var map;
+var directions;
+var routeActive = false;
+var startLocation;
+var endLocation;
+$("#show-route-btn").on("click", initializeMap);
+$("#clear-route-btn").on("click", clearRoute);
 
+function clearRoute(){
+  $("#map").remove()
+  routeActive = false;
+};
+
+function initializeMap(){
+  if (!routeActive) {
+    routeActive = true;
+  var createMapEl = $("<div>");
+  createMapEl.attr({id: "map", style: "width: 900px; height: 530px;"})
+  $("#map-container").append(createMapEl);
+ 
+startLocation = $(startAddress).val();
+endLocation = $(restAddress).val();
+$("#map").removeClass("hidden");
+
+    map = L.mapquest.map("map", {
+    center: [39.368279, -98.964844],
+    layers: L.mapquest.tileLayer("map"),
+    zoom: 4,
+  });
+map.addControl(L.mapquest.control());
+directions = L.mapquest.directions();
+directions.route({
+    start: startLocation,
+    end: endLocation,
+});
+}
+  
+};
+
+// function reRoute() {
+//   startLocation = $(startAddress).val();
+//   endLocation = $(restAddress).val();
+//  if (routeActive) {
+//   directions.route({
+//     start: startLocation,
+//     end: endLocation,
+//   });
+//  } else {
+//   initializeMap();
+//  }
+// };
