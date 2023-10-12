@@ -34,6 +34,7 @@ var lmReview4 = $("#lm-4");
 var learnMoreBtn = $(".continue-btn-lm");
 var historyEl = $("#pick-history");
 var dataArray = [];
+var rawData = [];
 
 // var cb1 = $("#cb1");
 // var cb2 = $("#cb2");
@@ -86,27 +87,35 @@ var options = {
   },
 };
 
-renderHistory();
-
 function renderHistory() {
   var rawHistoryArray = localStorage.getItem("dataArray");
+  var noOverwrite = localStorage.getItem("rawArray");
   if (rawHistoryArray === null) {
     dataArray = [];
   } else {
     dataArray = JSON.parse(rawHistoryArray);
-    for (let i = 0; i < dataArray.length; i++) {
-      var histBtn = $("<button>");
-      histBtn.text(dataArray[i]);
-      histBtn.attr({
-        id: `history-btn${i}`,
-        type: "button",
-        style: "display: flex; width: 100%; text-align: center;",
-        class: "button",
-      });
-      historyEl.append(histBtn);
-    }
+}
+if (noOverwrite === null) {
+  rawData = [];
+} else {
+  rawData = JSON.parse(noOverwrite);
+}
+}
+
+function refreshHistory() {
+  for (let i = 0; i < dataArray.length; i++) {
+    var histBtn = $("<button>");
+    histBtn.text(dataArray[i]);
+    histBtn.attr({
+      id: `history-btn${i}`,
+      type: "button",
+      style: "display: flex; width: 100%; text-align: center;",
+      class: "button",
+    });
+    historyEl.append(histBtn);
   }
 }
+
 
 function closeAlert() {
   $(inputAlert).addClass("hidden");
@@ -169,28 +178,22 @@ function fetchSearch() {
       if (data.businesses.length < 4) {
         alert("error caught");
       } else {
-        var histBtn = $("<button>");
-        histBtn.text(data.businesses[0].name);
-        histBtn.attr({
-        id: `history-btn`,
-        type: "button",
-        style: "display: flex; width: 100%; text-align: center;",
-        class: "button",
-        })
-
-       
-
+        renderHistory();
         if (dataArray.includes(data.businesses[0].name)) {
         } else {
+           rawData.push(data.businesses[0]);
           dataArray.push(data.businesses[0].name);
-          historyEl.append(histBtn);
         }
-        if (dataArray.length > 3){
-          dataArray.shift()
+        if (dataArray.length > 4){
+          dataArray.shift();
         } 
+        if (rawData.length > 4) {
+          rawData.shift();
+        }
           console.log(dataArray);
-          localStorage.setItem("dataArray", JSON.stringify(dataArray));
-        
+          localStorage.setItem("rawArray", JSON.stringify(rawData));
+        localStorage.setItem("dataArray", JSON.stringify(dataArray));
+        refreshHistory();
         homePageEl.addClass("hidden");
         resultsPageEl.removeClass("hidden");
         console.log(data);
@@ -372,3 +375,7 @@ $(document).on("click", ".three-get-dir", toMapsPageFromLearnMore);
 $(resultGoBackBtn).on("click", BacktoHome);
 $(learnMoreBackBtn).on("click", backToResults);
 $(mapBackBtn).on("click", MapstoResults);
+
+$(document).on("click", "#history-btn", function() {
+  console.log("button works")
+});
