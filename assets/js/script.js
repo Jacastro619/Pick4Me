@@ -30,7 +30,11 @@ var ratingOne = $("#rating1");
 var ratingTwo = $("#rating2");
 var ratingThree = $("#rating3");
 
-var learnMoreName  = $("#lmName")
+var learnMoreName = $("#lmName");
+var lmReview1 = $("#lm-1");
+var lmReview2 = $("#lm-2");
+var lmReview3 = $("#lm-3");
+var lmReview4 = $("#lm-4");
 
 var learnMoreBtn = $(".continue-btn-lm");
 
@@ -110,36 +114,71 @@ function fetchSearch() {
 
       for (let i = 0; i < data.businesses.length; i++) {
         // $(`#result-img${i}`).attr("src", (data.businesses[i].image_url));
-        $(`.custom-card-${i}`).attr("style", `background-image: url(${data.businesses[i].image_url}); background-size: cover;`);
+        $(`.custom-card-${i}`).attr(
+          "style",
+          `background-image: url(${data.businesses[i].image_url}); background-size: cover;`
+        );
       }
 
-      var reviewUrl = `https://corsproxy.io/?https://api.yelp.com/v3/businesses/${data.businesses[0].id}/reviews?sort_by=newest`;
+      var businessesId1 = data.businesses[0].id;
+      var businessesId2 = data.businesses[1].id;
+      var businessesId3 = data.businesses[2].id;
+      var businessesId4 = data.businesses[3].id;
 
-      fetch(reviewUrl, options)
-        .then(function (response) {
-          return response.json();
-        })
-        .then(function (data) {
-          console.log(data);
-          console.log("3 most recent star ratings");
-          for (var i = 0; i < data.reviews.length; i++) {
-            var ratingNum = i + 1;
-            console.log(
-              `Rating number ${ratingNum}: ${data.reviews[i].rating} stars by ${data.reviews[i].user.name}`
+      var reviewUrl;
+
+      $(lmReview1).on("click", function () {
+        reviewUrl = `https://corsproxy.io/?https://api.yelp.com/v3/businesses/${businessesId1}/reviews?sort_by=newest`;
+        fetchReviews();
+      });
+      $(lmReview2).on("click", function () {
+        reviewUrl = `https://corsproxy.io/?https://api.yelp.com/v3/businesses/${businessesId2}/reviews?sort_by=newest`;
+        fetchReviews();
+      });
+      $(lmReview3).on("click", function () {
+        reviewUrl = `https://corsproxy.io/?https://api.yelp.com/v3/businesses/${businessesId3}/reviews?sort_by=newest`;
+        fetchReviews();
+      });
+      $(lmReview4).on("click", function () {
+        reviewUrl = `https://corsproxy.io/?https://api.yelp.com/v3/businesses/${businessesId4}/reviews?sort_by=newest`;
+        fetchReviews();
+      });
+
+      function fetchReviews() {
+        fetch(reviewUrl, options)
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (data) {
+            console.log(data);
+            console.log("3 most recent star ratings");
+            for (var i = 0; i < data.reviews.length; i++) {
+              var ratingNum = i + 1;
+              console.log(
+                `Rating number ${ratingNum}: ${data.reviews[i].rating} stars by ${data.reviews[i].user.name}`
+              );
+            }
+
+            $(ratingOne).text(
+              `   ${data.reviews[0].rating} star rating by ${data.reviews[0].user.name}`
             );
-          }
-
-          $(learnMoreBtn).on("click", function(event) {
-            var restaurantName = $(event.target).parent("div").siblings("div").children("div").children("h1").text();
-            console.log(restaurantName);
-            $(learnMoreName).text(restaurantName);
-            $(ratingOne).text(`   ${data.reviews[0].rating} star rating by ${data.reviews[0].user.name}`);
-            $(ratingTwo).text(`   ${data.reviews[1].rating} star rating by ${data.reviews[1].user.name}`);
-            $(ratingThree).text(`   ${data.reviews[2].rating} star rating by ${data.reviews[2].user.name}`);
-            
-        
+            $(ratingTwo).text(
+              `   ${data.reviews[1].rating} star rating by ${data.reviews[1].user.name}`
+            );
+            $(ratingThree).text(
+              `   ${data.reviews[2].rating} star rating by ${data.reviews[2].user.name}`
+            );
           });
-        });
+      }
+      $(learnMoreBtn).on("click", function (event) {
+        var restaurantName = $(event.target)
+          .parent("div")
+          .siblings("div")
+          .children("div")
+          .children("h1")
+          .text();
+        $(learnMoreName).text(restaurantName);
+      });
     });
 }
 
