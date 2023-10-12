@@ -16,10 +16,10 @@ var homeMsg = $("#home-msg");
 var inputAlert = $(".custom-message");
 var closeAlertbtn = $(".close-alert");
 
-var pick1 = $("#pick1");
-var pick2 = $("#pick2");
-var pick3 = $("#pick3");
-var pick4 = $("#pick4");
+// var pick1 = $("#pick1");
+// var pick2 = $("#pick2");
+// var pick3 = $("#pick3");
+// var pick4 = $("#pick4");
 
 var rating = $(".3-rating");
 var price = $(".3-price");
@@ -108,7 +108,10 @@ function fetchSearch() {
         $(`#pick${i}`).text(data.businesses[i].name);
       }
 
-      
+      for (let i = 0; i < data.businesses.length; i++) {
+        // $(`#result-img${i}`).attr("src", (data.businesses[i].image_url));
+        $(`.custom-card-${i}`).attr("style", `background-image: url(${data.businesses[i].image_url}); background-size: cover;`);
+      }
 
       var reviewUrl = `https://corsproxy.io/?https://api.yelp.com/v3/businesses/${data.businesses[0].id}/reviews?sort_by=newest`;
 

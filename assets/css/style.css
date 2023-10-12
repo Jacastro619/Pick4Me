@@ -59,6 +59,7 @@ label.checkbox {
 }
 
 /*----- Results page ----- */
+
 .results-page {
   display: flex;
   margin-top: 100px;
@@ -139,7 +140,7 @@ label.checkbox {
   text-align: center;
 }
 
-.custom-card-1 {
+.custom-card-0 {
   background-image: url(https://s3-media2.fl.yelpcdn.com/bphoto/XihZqv1Rdw1P5vuwCS66Kw/o.jpg);
   background-size: cover;
   margin-bottom: 20px;
@@ -147,9 +148,9 @@ label.checkbox {
   box-shadow: 5px 5px 5px;
 }
 
+.custom-card-1,
 .custom-card-2,
-.custom-card-3,
-.custom-card-4 {
+.custom-card-3 {
   margin-bottom: 20px;
   margin-right: 20px;
   box-shadow: 5px 5px 5px;
