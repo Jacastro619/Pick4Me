@@ -169,12 +169,28 @@ function fetchSearch() {
       if (data.businesses.length < 4) {
         alert("error caught");
       } else {
+        var histBtn = $("<button>");
+        histBtn.text(data.businesses[0].name);
+        histBtn.attr({
+        id: `history-btn`,
+        type: "button",
+        style: "display: flex; width: 100%; text-align: center;",
+        class: "button",
+        })
+
+       
+
         if (dataArray.includes(data.businesses[0].name)) {
         } else {
           dataArray.push(data.businesses[0].name);
+          historyEl.append(histBtn);
+        }
+        if (dataArray.length > 3){
+          dataArray.shift()
+        } 
           console.log(dataArray);
           localStorage.setItem("dataArray", JSON.stringify(dataArray));
-        }
+        
         homePageEl.addClass("hidden");
         resultsPageEl.removeClass("hidden");
         console.log(data);
