@@ -38,6 +38,70 @@ var lmReview4 = $("#lm-4");
 
 var learnMoreBtn = $(".continue-btn-lm");
 
+var cb1 = $('#cb1');
+var cb2 = $('#cb2');
+var cb3 = $('#cb3');
+var cb4 = $('#cb4');
+// console.log(cb1);
+// var checkboxes = document.querySelectorAll('input[name="cb"]:checked');
+
+var priceRange = ""
+
+$(cb1).change(function() {
+ if ($(this).is(":checked")) {
+  priceRange += "1,"
+  console.log(priceRange)
+ } else {
+  priceRange = priceRange.replace(/1,/g, "")
+ } 
+});
+
+$(cb2).change(function() {
+  if ($(this).is(":checked")) {
+   priceRange += "2,"
+   console.log(priceRange)
+  } else {
+   priceRange = priceRange.replace(/2,/g, "")
+  } 
+ });
+
+ $(cb3).change(function() {
+  if ($(this).is(":checked")) {
+   priceRange += "3,"
+   console.log(priceRange)
+  } else {
+   priceRange = priceRange.replace(/3,/g, "")
+  } 
+ });
+
+ $(cb4).change(function() {
+  if ($(this).is(":checked")) {
+   priceRange += "4"
+   console.log(priceRange)
+  } else {
+   priceRange = priceRange.replace(/4/g, "")
+  } 
+ });
+  
+  // if (cb1.checked) {
+  //   // console.log(true)
+  //   priceRange += "1,"
+  // } 
+  
+  // if (cb2.checked) {
+  //   priceRange += "2,"
+  // }
+
+  // if (cb3.checked) {
+  //   priceRange += "3,"
+  // }
+
+  // if (cb4.checked) {
+  //   priceRange += "4"
+  // }
+
+  // console.log(priceRange);
+
 var options = {
   headers: {
     accept: "application/json",
@@ -91,9 +155,16 @@ function fetchSearch() {
   var userRadius = $("#one-input-radius").val().trim();
   var userFood = $("#one-input-food").val().trim();
 
+//   var priceRange = [];
+
+// checkboxes.forEach((checkbox) => {
+//   priceRange.push(checkbox.value);
+// }); console.log(priceRange);
+
+
   var searchUrl = `https://corsproxy.io/?https://api.yelp.com/v3/businesses/search?location=${userAddress}&term=${userFood}&radius=${
     userRadius * 1609
-  }&limit=4`;
+  }&limit=4&price=${priceRange}`;
 
   fetch(searchUrl, options)
     .then(function (response) {
