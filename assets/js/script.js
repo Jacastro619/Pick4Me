@@ -16,11 +16,6 @@ var homeMsg = $("#home-msg");
 var inputAlert = $(".custom-message");
 var closeAlertbtn = $(".close-alert");
 
-// var pick1 = $("#pick1");
-// var pick2 = $("#pick2");
-// var pick3 = $("#pick3");
-// var pick4 = $("#pick4");
-
 var rating = $("#stars");
 var price = $("#price");
 var address = $("#address");
@@ -38,69 +33,48 @@ var lmReview4 = $("#lm-4");
 
 var learnMoreBtn = $(".continue-btn-lm");
 
-var cb1 = $('#cb1');
-var cb2 = $('#cb2');
-var cb3 = $('#cb3');
-var cb4 = $('#cb4');
-// console.log(cb1);
-// var checkboxes = document.querySelectorAll('input[name="cb"]:checked');
+var cb1 = $("#cb1");
+var cb2 = $("#cb2");
+var cb3 = $("#cb3");
+var cb4 = $("#cb4");
 
-var priceRange = ""
+var priceRange = "";
 
-$(cb1).change(function() {
- if ($(this).is(":checked")) {
-  priceRange += "1,"
-  console.log(priceRange)
- } else {
-  priceRange = priceRange.replace(/1,/g, "")
- } 
+$(cb1).change(function () {
+  if ($(this).is(":checked")) {
+    priceRange += "1,";
+    console.log(priceRange);
+  } else {
+    priceRange = priceRange.replace(/1,/g, "");
+  }
 });
 
-$(cb2).change(function() {
+$(cb2).change(function () {
   if ($(this).is(":checked")) {
-   priceRange += "2,"
-   console.log(priceRange)
+    priceRange += "2,";
+    console.log(priceRange);
   } else {
-   priceRange = priceRange.replace(/2,/g, "")
-  } 
- });
+    priceRange = priceRange.replace(/2,/g, "");
+  }
+});
 
- $(cb3).change(function() {
+$(cb3).change(function () {
   if ($(this).is(":checked")) {
-   priceRange += "3,"
-   console.log(priceRange)
+    priceRange += "3,";
+    console.log(priceRange);
   } else {
-   priceRange = priceRange.replace(/3,/g, "")
-  } 
- });
+    priceRange = priceRange.replace(/3,/g, "");
+  }
+});
 
- $(cb4).change(function() {
+$(cb4).change(function () {
   if ($(this).is(":checked")) {
-   priceRange += "4"
-   console.log(priceRange)
+    priceRange += "4";
+    console.log(priceRange);
   } else {
-   priceRange = priceRange.replace(/4/g, "")
-  } 
- });
-  
-  // if (cb1.checked) {
-  //   // console.log(true)
-  //   priceRange += "1,"
-  // } 
-  
-  // if (cb2.checked) {
-  //   priceRange += "2,"
-  // }
-
-  // if (cb3.checked) {
-  //   priceRange += "3,"
-  // }
-
-  // if (cb4.checked) {
-  //   priceRange += "4"
-  // }
-
-  // console.log(priceRange);
+    priceRange = priceRange.replace(/4/g, "");
+  }
+});
 
 var options = {
   headers: {
@@ -151,20 +125,18 @@ function handleHomeForm() {
 }
 
 function fetchSearch() {
+  priceRange = priceRange.split(",");
+  priceRange.pop();
+
   var userAddress = $("#one-input-address").val().trim();
   var userRadius = $("#one-input-radius").val().trim();
   var userFood = $("#one-input-food").val().trim();
 
-//   var priceRange = [];
-
-// checkboxes.forEach((checkbox) => {
-//   priceRange.push(checkbox.value);
-// }); console.log(priceRange);
-
-
   var searchUrl = `https://corsproxy.io/?https://api.yelp.com/v3/businesses/search?location=${userAddress}&term=${userFood}&radius=${
     userRadius * 1609
   }&limit=4&price=${priceRange}`;
+
+  console.log(searchUrl);
 
   fetch(searchUrl, options)
     .then(function (response) {
@@ -184,7 +156,6 @@ function fetchSearch() {
       }
 
       for (let i = 0; i < data.businesses.length; i++) {
-        // $(`#result-img${i}`).attr("src", (data.businesses[i].image_url));
         $(`.custom-card-${i}`).attr(
           "style",
           `background-image: url(${data.businesses[i].image_url}); background-size: cover;`
@@ -257,7 +228,6 @@ function fetchSearch() {
                 `Rating number ${ratingNum}: ${data.reviews[i].rating} stars by ${data.reviews[i].user.name}`
               );
             }
-          
 
             $(ratingOne).text(
               `   ${data.reviews[0].rating} star rating by ${data.reviews[0].user.name}`
@@ -278,8 +248,6 @@ function fetchSearch() {
           .children("h1")
           .text();
         $(learnMoreName).text(restaurantName);
-       
-
       });
     });
 }
