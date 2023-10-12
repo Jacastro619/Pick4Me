@@ -133,7 +133,10 @@ function fetchSearch() {
         $(address).text(data.businesses[0].location.display_address.join(","));
         $(rating).text(`${data.businesses[0].rating} ⭐`);
         $(price).text(data.businesses[0].price);
-        
+        $(`.custom-card-three`).attr(
+          "style",
+          `background-image: url(${data.businesses[0].image_url}); background-size: cover;`
+        );
       });
       $(lmReview2).on("click", function () {
         reviewUrl = `https://corsproxy.io/?https://api.yelp.com/v3/businesses/${businessesId2}/reviews?sort_by=newest`;
@@ -141,6 +144,10 @@ function fetchSearch() {
         $(address).text(data.businesses[1].location.display_address.join(","));
         $(rating).text(`${data.businesses[1].rating} ⭐`);
         $(price).text(data.businesses[1].price);
+        $(`.custom-card-three`).attr(
+          "style",
+          `background-image: url(${data.businesses[1].image_url}); background-size: cover;`
+        );
       });
       $(lmReview3).on("click", function () {
         reviewUrl = `https://corsproxy.io/?https://api.yelp.com/v3/businesses/${businessesId3}/reviews?sort_by=newest`;
@@ -148,6 +155,10 @@ function fetchSearch() {
         $(address).text(data.businesses[2].location.display_address.join(","));
         $(rating).text(`${data.businesses[2].rating} ⭐`);
         $(price).text(data.businesses[2].price);
+        $(`.custom-card-three`).attr(
+          "style",
+          `background-image: url(${data.businesses[2].image_url}); background-size: cover;`
+        );
       });
       $(lmReview4).on("click", function () {
         reviewUrl = `https://corsproxy.io/?https://api.yelp.com/v3/businesses/${businessesId4}/reviews?sort_by=newest`;
@@ -155,6 +166,10 @@ function fetchSearch() {
         $(address).text(data.businesses[3].location.display_address.join(","));
         $(rating).text(`${data.businesses[3].rating} ⭐`);
         $(price).text(data.businesses[3].price);
+        $(`.custom-card-three`).attr(
+          "style",
+          `background-image: url(${data.businesses[3].image_url}); background-size: cover;`
+        );
       });
 
       function fetchReviews() {
