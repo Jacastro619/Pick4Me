@@ -21,6 +21,15 @@ var pick2 = $("#pick2");
 var pick3 = $("#pick3");
 var pick4 = $("#pick4");
 
+var rating = $(".3-rating");
+var price = $(".3-price");
+var address = $(".3-address");
+var recentRating = $(".3-recent-rating");
+
+var ratingOne = $("#rating1");
+var ratingTwo = $("#rating2");
+var ratingThree = $("#rating3");
+
 var learnMoreName  = $("#lmName")
 
 var learnMoreBtn = $(".continue-btn-lm");
@@ -99,11 +108,7 @@ function fetchSearch() {
         $(`#pick${i}`).text(data.businesses[i].name);
       }
 
-      $(learnMoreBtn).on("click", function(event) {
-        var restaurantName = $(event.target).parent("div").siblings("div").children("div").children("h1").text();
-        console.log(restaurantName);
-        $(learnMoreName).text(restaurantName);
-      });
+      
 
       var reviewUrl = `https://corsproxy.io/?https://api.yelp.com/v3/businesses/${data.businesses[0].id}/reviews?sort_by=newest`;
 
@@ -120,6 +125,17 @@ function fetchSearch() {
               `Rating number ${ratingNum}: ${data.reviews[i].rating} stars by ${data.reviews[i].user.name}`
             );
           }
+
+          $(learnMoreBtn).on("click", function(event) {
+            var restaurantName = $(event.target).parent("div").siblings("div").children("div").children("h1").text();
+            console.log(restaurantName);
+            $(learnMoreName).text(restaurantName);
+            $(ratingOne).text(`   ${data.reviews[0].rating} star rating by ${data.reviews[0].user.name}`);
+            $(ratingTwo).text(`   ${data.reviews[1].rating} star rating by ${data.reviews[1].user.name}`);
+            $(ratingThree).text(`   ${data.reviews[2].rating} star rating by ${data.reviews[2].user.name}`);
+            
+        
+          });
         });
     });
 }
