@@ -16,6 +16,15 @@ var homeMsg = $("#home-msg");
 var inputAlert = $(".custom-message");
 var closeAlertbtn = $(".close-alert");
 
+var pick1 = $("#pick1");
+var pick2 = $("#pick2");
+var pick3 = $("#pick3");
+var pick4 = $("#pick4");
+
+var learnMoreName  = $("#lmName")
+
+var learnMoreBtn = $(".continue-btn-lm");
+
 var options = {
   headers: {
     accept: "application/json",
@@ -45,9 +54,9 @@ function showUserInput() {
 function handleHomeForm() {
   console.log("clicked - Saving home data to local storage");
 
-  var userAddress = $("#one-input-address").val();
-  var userRadius = $("#one-input-radius").val();
-  var userFood = $("#one-input-food").val();
+  var userAddress = $("#one-input-address").val().trim();
+  var userRadius = $("#one-input-radius").val().trim();
+  var userFood = $("#one-input-food").val().trim();
 
   if (!userAddress || !userRadius || !userFood) {
     inputAlert.removeClass("hidden");
@@ -65,13 +74,13 @@ function handleHomeForm() {
 }
 
 function fetchSearch() {
-  var userAddress = $("#one-input-address").val();
-  var userRadius = $("#one-input-radius").val();
-  var userFood = $("#one-input-food").val();
+  var userAddress = $("#one-input-address").val().trim();
+  var userRadius = $("#one-input-radius").val().trim();
+  var userFood = $("#one-input-food").val().trim();
 
   var searchUrl = `https://corsproxy.io/?https://api.yelp.com/v3/businesses/search?location=${userAddress}&term=${userFood}&radius=${
     userRadius * 1609
-  }&limit=10`;
+  }&limit=4`;
 
   fetch(searchUrl, options)
     .then(function (response) {
@@ -85,6 +94,16 @@ function fetchSearch() {
       );
       console.log(`Price: ${data.businesses[0].price}`);
       console.log(`This restaurant has ${data.businesses[0].rating} stars`);
+
+      for (let i = 0; i < data.businesses.length; i++) {
+        $(`#pick${i}`).text(data.businesses[i].name);
+      }
+
+      $(learnMoreBtn).on("click", function(event) {
+        var restaurantName = $(event.target).parent("div").siblings("div").children("div").children("h1").text();
+        console.log(restaurantName);
+        $(learnMoreName).text(restaurantName);
+      });
 
       var reviewUrl = `https://corsproxy.io/?https://api.yelp.com/v3/businesses/${data.businesses[0].id}/reviews?sort_by=newest`;
 
