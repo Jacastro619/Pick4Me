@@ -21,9 +21,9 @@ var closeAlertbtn = $(".close-alert");
 // var pick3 = $("#pick3");
 // var pick4 = $("#pick4");
 
-var rating = $(".3-rating");
-var price = $(".3-price");
-var address = $(".3-address");
+var rating = $("#stars");
+var price = $("#price");
+var address = $("#address");
 var recentRating = $(".3-recent-rating");
 
 var ratingOne = $("#rating1");
@@ -130,18 +130,31 @@ function fetchSearch() {
       $(lmReview1).on("click", function () {
         reviewUrl = `https://corsproxy.io/?https://api.yelp.com/v3/businesses/${businessesId1}/reviews?sort_by=newest`;
         fetchReviews();
+        $(address).text(data.businesses[0].location.display_address.join(","));
+        $(rating).text(`${data.businesses[0].rating} ⭐`);
+        $(price).text(data.businesses[0].price);
+        
       });
       $(lmReview2).on("click", function () {
         reviewUrl = `https://corsproxy.io/?https://api.yelp.com/v3/businesses/${businessesId2}/reviews?sort_by=newest`;
         fetchReviews();
+        $(address).text(data.businesses[1].location.display_address.join(","));
+        $(rating).text(`${data.businesses[1].rating} ⭐`);
+        $(price).text(data.businesses[1].price);
       });
       $(lmReview3).on("click", function () {
         reviewUrl = `https://corsproxy.io/?https://api.yelp.com/v3/businesses/${businessesId3}/reviews?sort_by=newest`;
         fetchReviews();
+        $(address).text(data.businesses[2].location.display_address.join(","));
+        $(rating).text(`${data.businesses[2].rating} ⭐`);
+        $(price).text(data.businesses[2].price);
       });
       $(lmReview4).on("click", function () {
         reviewUrl = `https://corsproxy.io/?https://api.yelp.com/v3/businesses/${businessesId4}/reviews?sort_by=newest`;
         fetchReviews();
+        $(address).text(data.businesses[3].location.display_address.join(","));
+        $(rating).text(`${data.businesses[3].rating} ⭐`);
+        $(price).text(data.businesses[3].price);
       });
 
       function fetchReviews() {
@@ -158,6 +171,7 @@ function fetchSearch() {
                 `Rating number ${ratingNum}: ${data.reviews[i].rating} stars by ${data.reviews[i].user.name}`
               );
             }
+          
 
             $(ratingOne).text(
               `   ${data.reviews[0].rating} star rating by ${data.reviews[0].user.name}`
@@ -178,6 +192,8 @@ function fetchSearch() {
           .children("h1")
           .text();
         $(learnMoreName).text(restaurantName);
+       
+
       });
     });
 }
