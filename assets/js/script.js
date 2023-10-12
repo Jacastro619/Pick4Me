@@ -35,6 +35,10 @@ var learnMoreBtn = $(".continue-btn-lm");
 var historyEl = $("#pick-history");
 var dataArray = [];
 var rawData = [];
+var data1 = [];
+
+var startAddress = $("#start-address");
+var restAddress = $("#rest-address");
 
 // var cb1 = $("#cb1");
 // var cb2 = $("#cb2");
@@ -245,6 +249,8 @@ function fetchSearch() {
       if (data.businesses.length < 4) {
         alert("error caught");
       } else {
+        data1.push(data);
+        localStorage.setItem("data", JSON.stringify(data1));
         renderHistory();
         if (dataArray.includes(data.businesses[0].name)) {
         } else {
@@ -409,39 +415,49 @@ function MapstoResults() {
   mapPageEl.addClass("hidden");
 }
 
-function toMapsPageFromResults() {
+function toMapsPageFromResults1() {
+  var restData = JSON.parse(localStorage.getItem(data1));
+  data1.push(restData);
   resultsPageEl.addClass("hidden");
   mapPageEl.removeClass("hidden");
-
-  setTimeout(function () {
-    L.mapquest.key = "4JE8n3QyoprYfpwIHorXiugDcOsYQNLv";
-
-    var map = L.mapquest.map("map", {
-      center: [39.368279, -98.964844],
-      layers: L.mapquest.tileLayer("map"),
-      zoom: 4,
-    });
-  }, 250);
+  $(restAddress).val(data1[0].businesses[0].location.display_address.join(","));
 }
 
-function toMapsPageFromLearnMore() {
+function toMapsPageFromResults2() {
+  var restData = JSON.parse(localStorage.getItem(data1));
+  data1.push(restData);
+  resultsPageEl.addClass("hidden");
+  mapPageEl.removeClass("hidden");
+  $(restAddress).val(data1[0].businesses[1].location.display_address.join(","));
+}
+
+function toMapsPageFromResults3() {
+  var restData = JSON.parse(localStorage.getItem(data1));
+  data1.push(restData);
+  resultsPageEl.addClass("hidden");
+  mapPageEl.removeClass("hidden");
+  $(restAddress).val(data1[0].businesses[2].location.display_address.join(","));
+}
+
+function toMapsPageFromResults4() {
+  var restData = JSON.parse(localStorage.getItem(data1));
+  data1.push(restData);
+  resultsPageEl.addClass("hidden");
+  mapPageEl.removeClass("hidden");
+  $(restAddress).val(data1[0].businesses[3].location.display_address.join(","));
+  
+}
+
+function toMapsPageFromLearnMore(event) {
   learnMorePageEl.addClass("hidden");
   mapPageEl.removeClass("hidden");
-  setTimeout(function () {
-    L.mapquest.key = "4JE8n3QyoprYfpwIHorXiugDcOsYQNLv";
-
-    var map = L.mapquest.map("map", {
-      center: [39.368279, -98.964844],
-      layers: L.mapquest.tileLayer("map"),
-      zoom: 4,
-    });
-  }, 250);
+  restAddress.val($(event.target).siblings("div").children(".3-address").children("span").text());
 }
 
 $(resultBtn).on("click", toResultPage);
 $(closeAlertbtn).on("click", closeAlert);
 $(document).on("click", ".continue-btn-lm", toLearnMorePage);
-$(document).on("click", ".continue-btn-d", toMapsPageFromResults);
+
 $(document).on("click", ".three-get-dir", toMapsPageFromLearnMore);
 $(resultGoBackBtn).on("click", BacktoHome);
 $(learnMoreBackBtn).on("click", backToResults);
@@ -451,3 +467,10 @@ $(document).on("click", "#history-btn0", historyPick1);
 $(document).on("click", "#history-btn1", historyPick2);
 $(document).on("click", "#history-btn2", historyPick3);
 $(document).on("click", "#history-btn3", historyPick4);
+
+$("#pm-1").on("click", toMapsPageFromResults1);
+$("#pm-2").on("click", toMapsPageFromResults2);
+$("#pm-3").on("click", toMapsPageFromResults3);
+$("#pm-4").on("click", toMapsPageFromResults4);
+
+
