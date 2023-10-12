@@ -33,48 +33,48 @@ var lmReview4 = $("#lm-4");
 
 var learnMoreBtn = $(".continue-btn-lm");
 
-var cb1 = $("#cb1");
-var cb2 = $("#cb2");
-var cb3 = $("#cb3");
-var cb4 = $("#cb4");
+// var cb1 = $("#cb1");
+// var cb2 = $("#cb2");
+// var cb3 = $("#cb3");
+// var cb4 = $("#cb4");
 
-var priceRange = "";
+// var priceRange = "";
 
-$(cb1).change(function () {
-  if ($(this).is(":checked")) {
-    priceRange += "1,";
-    console.log(priceRange);
-  } else {
-    priceRange = priceRange.replace(/1,/g, "");
-  }
-});
+// $(cb1).change(function () {
+//   if ($(this).is(":checked")) {
+//     priceRange += "1,";
+//     console.log(priceRange);
+//   } else {
+//     priceRange = priceRange.replace(/1,/g, "");
+//   }
+// });
 
-$(cb2).change(function () {
-  if ($(this).is(":checked")) {
-    priceRange += "2,";
-    console.log(priceRange);
-  } else {
-    priceRange = priceRange.replace(/2,/g, "");
-  }
-});
+// $(cb2).change(function () {
+//   if ($(this).is(":checked")) {
+//     priceRange += "2,";
+//     console.log(priceRange);
+//   } else {
+//     priceRange = priceRange.replace(/2,/g, "");
+//   }
+// });
 
-$(cb3).change(function () {
-  if ($(this).is(":checked")) {
-    priceRange += "3,";
-    console.log(priceRange);
-  } else {
-    priceRange = priceRange.replace(/3,/g, "");
-  }
-});
+// $(cb3).change(function () {
+//   if ($(this).is(":checked")) {
+//     priceRange += "3,";
+//     console.log(priceRange);
+//   } else {
+//     priceRange = priceRange.replace(/3,/g, "");
+//   }
+// });
 
-$(cb4).change(function () {
-  if ($(this).is(":checked")) {
-    priceRange += "4";
-    console.log(priceRange);
-  } else {
-    priceRange = priceRange.replace(/4/g, "");
-  }
-});
+// $(cb4).change(function () {
+//   if ($(this).is(":checked")) {
+//     priceRange += "4,";
+//     console.log(priceRange);
+//   } else {
+//     priceRange = priceRange.replace(/4/g, "");
+//   }
+// });
 
 var options = {
   headers: {
@@ -112,8 +112,6 @@ function handleHomeForm() {
   if (!userAddress || !userRadius || !userFood) {
     inputAlert.removeClass("hidden");
   } else {
-    homePageEl.addClass("hidden");
-    resultsPageEl.removeClass("hidden");
     localStorage.setItem("userAddress", userAddress);
     localStorage.setItem("userRadius", userRadius);
     localStorage.setItem("UserFood", userFood);
@@ -125,130 +123,145 @@ function handleHomeForm() {
 }
 
 function fetchSearch() {
-  priceRange = priceRange.split(",");
-  priceRange.pop();
-
   var userAddress = $("#one-input-address").val().trim();
   var userRadius = $("#one-input-radius").val().trim();
   var userFood = $("#one-input-food").val().trim();
 
   var searchUrl = `https://corsproxy.io/?https://api.yelp.com/v3/businesses/search?location=${userAddress}&term=${userFood}&radius=${
     userRadius * 1609
-  }&limit=4&price=${priceRange}`;
+  }&limit=4`;
 
   console.log(searchUrl);
 
   fetch(searchUrl, options)
     .then(function (response) {
+      if (!response.ok) {
+        alert("error caught");
+        return Promise.reject(new Error("Response is not okay"));
+      }
       return response.json();
     })
     .then(function (data) {
-      console.log(data);
-      console.log(data.businesses[0].name);
-      console.log(
-        `Address: ${data.businesses[0].location.display_address.join(", ")}`
-      );
-      console.log(`Price: ${data.businesses[0].price}`);
-      console.log(`This restaurant has ${data.businesses[0].rating} stars`);
-
-      for (let i = 0; i < data.businesses.length; i++) {
-        $(`#pick${i}`).text(data.businesses[i].name);
-      }
-
-      for (let i = 0; i < data.businesses.length; i++) {
-        $(`.custom-card-${i}`).attr(
-          "style",
-          `background-image: url(${data.businesses[i].image_url}); background-size: cover;`
+      if (data.businesses.length < 4) {
+        alert("error caught");
+      } else {
+        homePageEl.addClass("hidden");
+        resultsPageEl.removeClass("hidden");
+        console.log(data);
+        console.log(data.businesses[0].name);
+        console.log(
+          `Address: ${data.businesses[0].location.display_address.join(", ")}`
         );
-      }
+        console.log(`Price: ${data.businesses[0].price}`);
+        console.log(`This restaurant has ${data.businesses[0].rating} stars`);
 
-      var businessesId1 = data.businesses[0].id;
-      var businessesId2 = data.businesses[1].id;
-      var businessesId3 = data.businesses[2].id;
-      var businessesId4 = data.businesses[3].id;
+        for (let i = 0; i < data.businesses.length; i++) {
+          $(`#pick${i}`).text(data.businesses[i].name);
+        }
 
-      var reviewUrl;
+        for (let i = 0; i < data.businesses.length; i++) {
+          $(`.custom-card-${i}`).attr(
+            "style",
+            `background-image: url(${data.businesses[i].image_url}); background-size: cover;`
+          );
+        }
 
-      $(lmReview1).on("click", function () {
-        reviewUrl = `https://corsproxy.io/?https://api.yelp.com/v3/businesses/${businessesId1}/reviews?sort_by=newest`;
-        fetchReviews();
-        $(address).text(data.businesses[0].location.display_address.join(","));
-        $(rating).text(`${data.businesses[0].rating} ⭐`);
-        $(price).text(data.businesses[0].price);
-        $(`.custom-card-three`).attr(
-          "style",
-          `background-image: url(${data.businesses[0].image_url}); background-size: cover;`
-        );
-      });
-      $(lmReview2).on("click", function () {
-        reviewUrl = `https://corsproxy.io/?https://api.yelp.com/v3/businesses/${businessesId2}/reviews?sort_by=newest`;
-        fetchReviews();
-        $(address).text(data.businesses[1].location.display_address.join(","));
-        $(rating).text(`${data.businesses[1].rating} ⭐`);
-        $(price).text(data.businesses[1].price);
-        $(`.custom-card-three`).attr(
-          "style",
-          `background-image: url(${data.businesses[1].image_url}); background-size: cover;`
-        );
-      });
-      $(lmReview3).on("click", function () {
-        reviewUrl = `https://corsproxy.io/?https://api.yelp.com/v3/businesses/${businessesId3}/reviews?sort_by=newest`;
-        fetchReviews();
-        $(address).text(data.businesses[2].location.display_address.join(","));
-        $(rating).text(`${data.businesses[2].rating} ⭐`);
-        $(price).text(data.businesses[2].price);
-        $(`.custom-card-three`).attr(
-          "style",
-          `background-image: url(${data.businesses[2].image_url}); background-size: cover;`
-        );
-      });
-      $(lmReview4).on("click", function () {
-        reviewUrl = `https://corsproxy.io/?https://api.yelp.com/v3/businesses/${businessesId4}/reviews?sort_by=newest`;
-        fetchReviews();
-        $(address).text(data.businesses[3].location.display_address.join(","));
-        $(rating).text(`${data.businesses[3].rating} ⭐`);
-        $(price).text(data.businesses[3].price);
-        $(`.custom-card-three`).attr(
-          "style",
-          `background-image: url(${data.businesses[3].image_url}); background-size: cover;`
-        );
-      });
+        var businessesId1 = data.businesses[0].id;
+        var businessesId2 = data.businesses[1].id;
+        var businessesId3 = data.businesses[2].id;
+        var businessesId4 = data.businesses[3].id;
 
-      function fetchReviews() {
-        fetch(reviewUrl, options)
-          .then(function (response) {
-            return response.json();
-          })
-          .then(function (data) {
-            console.log(data);
-            console.log("3 most recent star ratings");
-            for (var i = 0; i < data.reviews.length; i++) {
-              var ratingNum = i + 1;
-              console.log(
-                `Rating number ${ratingNum}: ${data.reviews[i].rating} stars by ${data.reviews[i].user.name}`
+        var reviewUrl;
+
+        $(lmReview1).on("click", function () {
+          reviewUrl = `https://corsproxy.io/?https://api.yelp.com/v3/businesses/${businessesId1}/reviews?sort_by=newest`;
+          fetchReviews();
+          $(address).text(
+            data.businesses[0].location.display_address.join(",")
+          );
+          $(rating).text(`${data.businesses[0].rating} ⭐`);
+          $(price).text(data.businesses[0].price);
+          $(`.custom-card-three`).attr(
+            "style",
+            `background-image: url(${data.businesses[0].image_url}); background-size: cover;`
+          );
+        });
+        $(lmReview2).on("click", function () {
+          reviewUrl = `https://corsproxy.io/?https://api.yelp.com/v3/businesses/${businessesId2}/reviews?sort_by=newest`;
+          fetchReviews();
+          $(address).text(
+            data.businesses[1].location.display_address.join(",")
+          );
+          $(rating).text(`${data.businesses[1].rating} ⭐`);
+          $(price).text(data.businesses[1].price);
+          $(`.custom-card-three`).attr(
+            "style",
+            `background-image: url(${data.businesses[1].image_url}); background-size: cover;`
+          );
+        });
+        $(lmReview3).on("click", function () {
+          reviewUrl = `https://corsproxy.io/?https://api.yelp.com/v3/businesses/${businessesId3}/reviews?sort_by=newest`;
+          fetchReviews();
+          $(address).text(
+            data.businesses[2].location.display_address.join(",")
+          );
+          $(rating).text(`${data.businesses[2].rating} ⭐`);
+          $(price).text(data.businesses[2].price);
+          $(`.custom-card-three`).attr(
+            "style",
+            `background-image: url(${data.businesses[2].image_url}); background-size: cover;`
+          );
+        });
+        $(lmReview4).on("click", function () {
+          reviewUrl = `https://corsproxy.io/?https://api.yelp.com/v3/businesses/${businessesId4}/reviews?sort_by=newest`;
+          fetchReviews();
+          $(address).text(
+            data.businesses[3].location.display_address.join(",")
+          );
+          $(rating).text(`${data.businesses[3].rating} ⭐`);
+          $(price).text(data.businesses[3].price);
+          $(`.custom-card-three`).attr(
+            "style",
+            `background-image: url(${data.businesses[3].image_url}); background-size: cover;`
+          );
+        });
+
+        function fetchReviews() {
+          fetch(reviewUrl, options)
+            .then(function (response) {
+              return response.json();
+            })
+            .then(function (data) {
+              console.log(data);
+              console.log("3 most recent star ratings");
+              for (var i = 0; i < data.reviews.length; i++) {
+                var ratingNum = i + 1;
+                console.log(
+                  `Rating number ${ratingNum}: ${data.reviews[i].rating} stars by ${data.reviews[i].user.name}`
+                );
+              }
+
+              $(ratingOne).text(
+                `   ${data.reviews[0].rating} star rating by ${data.reviews[0].user.name}`
               );
-            }
-
-            $(ratingOne).text(
-              `   ${data.reviews[0].rating} star rating by ${data.reviews[0].user.name}`
-            );
-            $(ratingTwo).text(
-              `   ${data.reviews[1].rating} star rating by ${data.reviews[1].user.name}`
-            );
-            $(ratingThree).text(
-              `   ${data.reviews[2].rating} star rating by ${data.reviews[2].user.name}`
-            );
-          });
+              $(ratingTwo).text(
+                `   ${data.reviews[1].rating} star rating by ${data.reviews[1].user.name}`
+              );
+              $(ratingThree).text(
+                `   ${data.reviews[2].rating} star rating by ${data.reviews[2].user.name}`
+              );
+            });
+        }
+        $(learnMoreBtn).on("click", function (event) {
+          var restaurantName = $(event.target)
+            .parent("div")
+            .siblings("div")
+            .children("div")
+            .children("h1")
+            .text();
+          $(learnMoreName).text(restaurantName);
+        });
       }
-      $(learnMoreBtn).on("click", function (event) {
-        var restaurantName = $(event.target)
-          .parent("div")
-          .siblings("div")
-          .children("div")
-          .children("h1")
-          .text();
-        $(learnMoreName).text(restaurantName);
-      });
     });
 }
 
