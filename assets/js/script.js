@@ -94,12 +94,12 @@ function renderHistory() {
     dataArray = [];
   } else {
     dataArray = JSON.parse(rawHistoryArray);
-}
-if (noOverwrite === null) {
-  rawData = [];
-} else {
-  rawData = JSON.parse(noOverwrite);
-}
+  }
+  if (noOverwrite === null) {
+    rawData = [];
+  } else {
+    rawData = JSON.parse(noOverwrite);
+  }
 }
 
 function refreshHistory() {
@@ -115,7 +115,6 @@ function refreshHistory() {
     historyEl.append(histBtn);
   }
 }
-
 
 function closeAlert() {
   $(inputAlert).addClass("hidden");
@@ -133,6 +132,74 @@ function showUserInput() {
   if (!addressUser || !radiusUser || !foodUser) {
     return;
   }
+}
+
+function historyPick1() {
+  resultsPageEl.addClass("hidden");
+  learnMorePageEl.removeClass("hidden");
+  $(learnMoreName).text(rawData[0].name);
+  $(address).text(rawData[0].location.display_address.join(","));
+  $(rating).text(`${rawData[0].rating} ⭐`);
+  $(price).text(rawData[0].price);
+  $(`.custom-card-three`).attr(
+    "style",
+    `background-image: url(${rawData[0].image_url}); background-size: cover;`
+  );
+  $("#3rr").text("");
+  $(ratingOne).text("");
+  $(ratingTwo).text("");
+  $(ratingThree).text("");
+}
+
+function historyPick2() {
+  resultsPageEl.addClass("hidden");
+  learnMorePageEl.removeClass("hidden");
+  $(learnMoreName).text(rawData[1].name);
+  $(address).text(rawData[1].location.display_address.join(","));
+  $(rating).text(`${rawData[1].rating} ⭐`);
+  $(price).text(rawData[1].price);
+  $(`.custom-card-three`).attr(
+    "style",
+    `background-image: url(${rawData[1].image_url}); background-size: cover;`
+  );
+  $("#3rr").text("");
+  $(ratingOne).text("");
+  $(ratingTwo).text("");
+  $(ratingThree).text("");
+}
+
+function historyPick3() {
+  resultsPageEl.addClass("hidden");
+  learnMorePageEl.removeClass("hidden");
+  $(learnMoreName).text(rawData[2].name);
+  $(address).text(rawData[2].location.display_address.join(","));
+  $(rating).text(`${rawData[2].rating} ⭐`);
+  $(price).text(rawData[2].price);
+  $(`.custom-card-three`).attr(
+    "style",
+    `background-image: url(${rawData[2].image_url}); background-size: cover;`
+  );
+  $("#3rr").text("");
+  $(ratingOne).text("");
+  $(ratingTwo).text("");
+  $(ratingThree).text("");
+}
+
+function historyPick4() {
+  resultsPageEl.addClass("hidden");
+  learnMorePageEl.removeClass("hidden");
+  $(learnMoreName).text(rawData[3].name);
+  $(address).text(rawData[3].location.display_address.join(","));
+  $(rating).text(`${rawData[3].rating} ⭐`);
+  $(price).text(rawData[3].price);
+  $(`.custom-card-three`).attr(
+    "style",
+    `background-image: url(${rawData[3].image_url}); background-size: cover;`
+  );
+  $("#3rr").text("");
+  $(ratingOne).text("");
+  $(ratingTwo).text("");
+  $(ratingThree).text("");
 }
 
 function handleHomeForm() {
@@ -181,17 +248,17 @@ function fetchSearch() {
         renderHistory();
         if (dataArray.includes(data.businesses[0].name)) {
         } else {
-           rawData.push(data.businesses[0]);
+          rawData.push(data.businesses[0]);
           dataArray.push(data.businesses[0].name);
         }
-        if (dataArray.length > 4){
+        if (dataArray.length > 4) {
           dataArray.shift();
-        } 
+        }
         if (rawData.length > 4) {
           rawData.shift();
         }
-          console.log(dataArray);
-          localStorage.setItem("rawArray", JSON.stringify(rawData));
+        console.log(rawData[0]);
+        localStorage.setItem("rawArray", JSON.stringify(rawData));
         localStorage.setItem("dataArray", JSON.stringify(dataArray));
         refreshHistory();
         homePageEl.addClass("hidden");
@@ -229,6 +296,7 @@ function fetchSearch() {
             data.businesses[0].location.display_address.join(",")
           );
           $(rating).text(`${data.businesses[0].rating} ⭐`);
+          $("#3rr").text("Most Recent Star Rating:");
           $(price).text(data.businesses[0].price);
           $(`.custom-card-three`).attr(
             "style",
@@ -242,6 +310,7 @@ function fetchSearch() {
             data.businesses[1].location.display_address.join(",")
           );
           $(rating).text(`${data.businesses[1].rating} ⭐`);
+          $("#3rr").text("Most Recent Star Rating:");
           $(price).text(data.businesses[1].price);
           $(`.custom-card-three`).attr(
             "style",
@@ -255,6 +324,7 @@ function fetchSearch() {
             data.businesses[2].location.display_address.join(",")
           );
           $(rating).text(`${data.businesses[2].rating} ⭐`);
+          $("#3rr").text("Most Recent Star Rating:");
           $(price).text(data.businesses[2].price);
           $(`.custom-card-three`).attr(
             "style",
@@ -268,6 +338,7 @@ function fetchSearch() {
             data.businesses[3].location.display_address.join(",")
           );
           $(rating).text(`${data.businesses[3].rating} ⭐`);
+          $("#3rr").text("Most Recent Star Rating:");
           $(price).text(data.businesses[3].price);
           $(`.custom-card-three`).attr(
             "style",
@@ -376,6 +447,7 @@ $(resultGoBackBtn).on("click", BacktoHome);
 $(learnMoreBackBtn).on("click", backToResults);
 $(mapBackBtn).on("click", MapstoResults);
 
-$(document).on("click", "#history-btn", function() {
-  console.log("button works")
-});
+$(document).on("click", "#history-btn0", historyPick1);
+$(document).on("click", "#history-btn1", historyPick2);
+$(document).on("click", "#history-btn2", historyPick3);
+$(document).on("click", "#history-btn3", historyPick4);
