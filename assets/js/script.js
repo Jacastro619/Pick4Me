@@ -445,13 +445,18 @@ function toMapsPageFromResults4() {
   resultsPageEl.addClass("hidden");
   mapPageEl.removeClass("hidden");
   $(restAddress).val(data1[0].businesses[3].location.display_address.join(","));
-  
 }
 
 function toMapsPageFromLearnMore(event) {
   learnMorePageEl.addClass("hidden");
   mapPageEl.removeClass("hidden");
-  restAddress.val($(event.target).siblings("div").children(".3-address").children("span").text());
+  restAddress.val(
+    $(event.target)
+      .siblings("div")
+      .children(".3-address")
+      .children("span")
+      .text()
+  );
 }
 
 $(resultBtn).on("click", toResultPage);
@@ -482,36 +487,49 @@ var endLocation;
 $("#show-route-btn").on("click", initializeMap);
 $("#clear-route-btn").on("click", clearRoute);
 
-function clearRoute(){
-  $("#map").remove()
+function clearRoute() {
+  $("#map").remove();
   routeActive = false;
-};
-
-function initializeMap(){
-  if (!routeActive) {
-    routeActive = true;
-  var createMapEl = $("<div>");
-  createMapEl.attr({id: "map", style: "width: 900px; height: 530px;"})
-  $("#map-container").append(createMapEl);
- 
-startLocation = $(startAddress).val();
-endLocation = $(restAddress).val();
-$("#map").removeClass("hidden");
-
-    map = L.mapquest.map("map", {
-    center: [39.368279, -98.964844],
-    layers: L.mapquest.tileLayer("map"),
-    zoom: 4,
-  });
-map.addControl(L.mapquest.control());
-directions = L.mapquest.directions();
-directions.route({
-    start: startLocation,
-    end: endLocation,
-});
 }
-  
-};
+
+function initializeMap() {
+  if (!routeActive) {
+    startLocation = $(startAddress).val();
+    endLocation = $(restAddress).val();
+
+    var routeUrl = `https://www.mapquestapi.com/directions/v2/route?key=4JE8n3QyoprYfpwIHorXiugDcOsYQNLv&from=${startLocation}&to=${endLocation}&outFormat=json&ambiguities=ignore&routeType=fastest&doReverseGeocode=false&enhancedNarrative=false&avoidTimedConditions=false`;
+
+    fetch(routeUrl)
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        if (data.info.statuscode !== 402) {
+          routeActive = true;
+          var createMapEl = $("<div>");
+          createMapEl.attr({
+            id: "map",
+            style: "width: 900px; height: 530px;",
+          });
+          $("#map-container").append(createMapEl);
+          console.log(data);
+          map = L.mapquest.map("map", {
+            center: [39.368279, -98.964844],
+            layers: L.mapquest.tileLayer("map"),
+            zoom: 4,
+          });
+          map.addControl(L.mapquest.control());
+          directions = L.mapquest.directions();
+          directions.route({
+            start: startLocation,
+            end: endLocation,
+          });
+        } else {
+          alert("Invalid address, please enter valid adresss");
+        }
+      });
+  }
+}
 
 // function reRoute() {
 //   startLocation = $(startAddress).val();

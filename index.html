@@ -17,7 +17,7 @@
   </head>
   <body>
     <!-- -------------------Home page-------------------------------     -->
-    <div id="home-page" class="home-page hidden">
+    <div id="home-page" class="home-page">
         <h1 id="home-img" class="app-name"><img src="./assets/images/logo.png"/></h1>
         <div>
           <img src="./assets/images/logo2.png" alt="Picture of the Application Logo" class="logoimg">
@@ -84,13 +84,13 @@
         <div class="card custom-card-0">
           <div class="card-content card-1">
             <div class="content">
-              <h1 id="pick0">Restaurant Name</h1>
               <h2>This is your 1st pick!</h2>
+              <h1 id="pick0">Restaurant Name</h1>
             </div>
           </div>
           <div class="continue-btns">
             <button id="lm-1" class="button continue-btn-lm">Learn More</button>
-            <button class="button continue-btn-d" id="pm-1">Pick Me</button>
+            <button class="button continue-btn-d" id="pm-1">Pick Me!</button>
           </div>
         </div>
       </div>
@@ -98,8 +98,8 @@
           <div class="card custom-card-1">
             <div class="card-content custom-content">
               <div class="content">
-                <h1 id="pick1">Restaurant Name</h1>
                 <h2>This is your 2nd pick!</h2>
+                <h1 id="pick1">Restaurant Name</h1>
               </div>
             </div>
             <div class="continue-btns">
@@ -112,8 +112,8 @@
           <div class="card custom-card-2">
             <div class="card-content custom-content">
               <div class="content">
-                <h1 id="pick2">Restaurant Name</h1>
                 <h2>This is your 3rd pick!</h2>
+                <h1 id="pick2">Restaurant Name</h1>
               </div>
             </div>
             <div class="continue-btns">
@@ -126,13 +126,13 @@
           <div class="card custom-card-3">
             <div class="card-content custom-content">
               <div class="content">
-                <h1 id="pick3">Restaurant Name</h1>
                 <h2>This is your 4th pick!</h2>
+                <h1 id="pick3">Restaurant Name</h1>
               </div>
             </div>
             <div class="continue-btns">
               <button id="lm-4" class="button continue-btn-lm">Learn More</button>
-              <button class="button continue-btn-d" id="pm-4">Pick Me</button>
+              <button class="button continue-btn-d" id="pm-4">Pick Me!</button>
             </div>
           </div>
         </div>
@@ -165,7 +165,7 @@
     </div>
   </div>
 <!-- -------------------Map page--------------------------------------     -->
-  <div class="map-page">
+  <div class="map-page hidden">
     <div>
       <img src="./assets/images/logo2.png" alt="Picture of the Application Logo" class="logoimg">
     </div>
@@ -183,7 +183,7 @@
       <div class="field">
         <label class="label">Restaurant Address:
         <div class="control">
-          <input class="input" id="rest-address" type="text">
+          <input class="input" id="rest-address" type="text" readonly>
         </div>
         </label>
       </div>
