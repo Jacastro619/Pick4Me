@@ -1,3 +1,9 @@
+L.mapquest.key = "4JE8n3QyoprYfpwIHorXiugDcOsYQNLv";
+var map;
+var directions;
+var routeActive = false;
+var startLocation;
+var endLocation;
 var resultBtn = $("#one-btn-results");
 var form1El = $("#form1");
 var homePageEl = $(".home-page");
@@ -14,74 +20,28 @@ var radiusInput = $("#one-input-radius");
 var foodInput = $("#one-input-food");
 var homeMsg = $("#home-msg");
 var inputAlert = $(".custom-message");
+var inputAlert2 = $(".custom-message-2");
+var inputAlert3 = $(".custom-message-3");
 var closeAlertbtn = $(".close-alert");
-
 var rating = $("#stars");
 var price = $("#price");
 var address = $("#address");
 var recentRating = $(".3-recent-rating");
-
 var ratingOne = $("#rating1");
 var ratingTwo = $("#rating2");
 var ratingThree = $("#rating3");
-
 var learnMoreName = $("#lmName");
 var lmReview1 = $("#lm-1");
 var lmReview2 = $("#lm-2");
 var lmReview3 = $("#lm-3");
 var lmReview4 = $("#lm-4");
-
 var learnMoreBtn = $(".continue-btn-lm");
 var historyEl = $("#pick-history");
 var dataArray = [];
 var rawData = [];
 var data1 = [];
-
 var startAddress = $("#start-address");
 var restAddress = $("#rest-address");
-
-// var cb1 = $("#cb1");
-// var cb2 = $("#cb2");
-// var cb3 = $("#cb3");
-// var cb4 = $("#cb4");
-
-// var priceRange = "";
-
-// $(cb1).change(function () {
-//   if ($(this).is(":checked")) {
-//     priceRange += "1,";
-//     console.log(priceRange);
-//   } else {
-//     priceRange = priceRange.replace(/1,/g, "");
-//   }
-// });
-
-// $(cb2).change(function () {
-//   if ($(this).is(":checked")) {
-//     priceRange += "2,";
-//     console.log(priceRange);
-//   } else {
-//     priceRange = priceRange.replace(/2,/g, "");
-//   }
-// });
-
-// $(cb3).change(function () {
-//   if ($(this).is(":checked")) {
-//     priceRange += "3,";
-//     console.log(priceRange);
-//   } else {
-//     priceRange = priceRange.replace(/3,/g, "");
-//   }
-// });
-
-// $(cb4).change(function () {
-//   if ($(this).is(":checked")) {
-//     priceRange += "4,";
-//     console.log(priceRange);
-//   } else {
-//     priceRange = priceRange.replace(/4/g, "");
-//   }
-// });
 
 var options = {
   headers: {
@@ -90,6 +50,86 @@ var options = {
       "Bearer cpIZVMVOeEQWNK3YQtqsptY8MgVpErO4syU6mpNzUmDE26gJwG34Z6GVQHXpl-mg_v0ZneUmCS3qtJPVNB6n9r-lXzl9CsVAtIgyiqW-Wkb5z9ZAQRtrrq_qE_khZXYx",
   },
 };
+
+function toResultPage() {
+  console.log("works");
+  handleHomeForm();
+}
+
+function BacktoHome() {
+  homePageEl.removeClass("hidden");
+  resultsPageEl.addClass("hidden");
+}
+
+function toLearnMorePage() {
+  resultsPageEl.addClass("hidden");
+  learnMorePageEl.removeClass("hidden");
+}
+
+function backToResults() {
+  resultsPageEl.removeClass("hidden");
+  learnMorePageEl.addClass("hidden");
+}
+
+function MapstoResults() {
+  resultsPageEl.removeClass("hidden");
+  mapPageEl.addClass("hidden");
+}
+
+function toMapsPageFromResults1() {
+  var restData = JSON.parse(localStorage.getItem(data1));
+  data1.push(restData);
+  resultsPageEl.addClass("hidden");
+  mapPageEl.removeClass("hidden");
+  $(restAddress).val(data1[0].businesses[0].location.display_address.join(","));
+}
+
+function toMapsPageFromResults2() {
+  var restData = JSON.parse(localStorage.getItem(data1));
+  data1.push(restData);
+  resultsPageEl.addClass("hidden");
+  mapPageEl.removeClass("hidden");
+  $(restAddress).val(data1[0].businesses[1].location.display_address.join(","));
+}
+
+function toMapsPageFromResults3() {
+  var restData = JSON.parse(localStorage.getItem(data1));
+  data1.push(restData);
+  resultsPageEl.addClass("hidden");
+  mapPageEl.removeClass("hidden");
+  $(restAddress).val(data1[0].businesses[2].location.display_address.join(","));
+}
+
+function toMapsPageFromResults4() {
+  var restData = JSON.parse(localStorage.getItem(data1));
+  data1.push(restData);
+  resultsPageEl.addClass("hidden");
+  mapPageEl.removeClass("hidden");
+  $(restAddress).val(data1[0].businesses[3].location.display_address.join(","));
+}
+
+function toMapsPageFromLearnMore(event) {
+  learnMorePageEl.addClass("hidden");
+  mapPageEl.removeClass("hidden");
+  restAddress.val(
+    $(event.target)
+      .siblings("div")
+      .children(".3-address")
+      .children("span")
+      .text()
+  );
+}
+
+function closeAlert() {
+  $(inputAlert).addClass("hidden");
+  $(inputAlert2).addClass("hidden");
+  $(inputAlert3).addClass("hidden");
+}
+
+function displayHomeError(type, message) {
+  homeMsg.textContent = message;
+  homeMsg.addClass("class", type);
+}
 
 function renderHistory() {
   var rawHistoryArray = localStorage.getItem("dataArray");
@@ -120,15 +160,6 @@ function refreshHistory() {
   }
 }
 
-function closeAlert() {
-  $(inputAlert).addClass("hidden");
-}
-
-function displayHomeError(type, message) {
-  homeMsg.textContent = message;
-  homeMsg.addClass("class", type);
-}
-
 function showUserInput() {
   var addressUser = localStorage.getItem("userAddress");
   var radiusUser = localStorage.getItem("userRadius");
@@ -136,74 +167,6 @@ function showUserInput() {
   if (!addressUser || !radiusUser || !foodUser) {
     return;
   }
-}
-
-function historyPick1() {
-  resultsPageEl.addClass("hidden");
-  learnMorePageEl.removeClass("hidden");
-  $(learnMoreName).text(rawData[0].name);
-  $(address).text(rawData[0].location.display_address.join(","));
-  $(rating).text(`${rawData[0].rating} ⭐`);
-  $(price).text(rawData[0].price);
-  $(`.custom-card-three`).attr(
-    "style",
-    `background-image: url(${rawData[0].image_url}); background-size: cover;`
-  );
-  $("#3rr").text("");
-  $(ratingOne).text("");
-  $(ratingTwo).text("");
-  $(ratingThree).text("");
-}
-
-function historyPick2() {
-  resultsPageEl.addClass("hidden");
-  learnMorePageEl.removeClass("hidden");
-  $(learnMoreName).text(rawData[1].name);
-  $(address).text(rawData[1].location.display_address.join(","));
-  $(rating).text(`${rawData[1].rating} ⭐`);
-  $(price).text(rawData[1].price);
-  $(`.custom-card-three`).attr(
-    "style",
-    `background-image: url(${rawData[1].image_url}); background-size: cover;`
-  );
-  $("#3rr").text("");
-  $(ratingOne).text("");
-  $(ratingTwo).text("");
-  $(ratingThree).text("");
-}
-
-function historyPick3() {
-  resultsPageEl.addClass("hidden");
-  learnMorePageEl.removeClass("hidden");
-  $(learnMoreName).text(rawData[2].name);
-  $(address).text(rawData[2].location.display_address.join(","));
-  $(rating).text(`${rawData[2].rating} ⭐`);
-  $(price).text(rawData[2].price);
-  $(`.custom-card-three`).attr(
-    "style",
-    `background-image: url(${rawData[2].image_url}); background-size: cover;`
-  );
-  $("#3rr").text("");
-  $(ratingOne).text("");
-  $(ratingTwo).text("");
-  $(ratingThree).text("");
-}
-
-function historyPick4() {
-  resultsPageEl.addClass("hidden");
-  learnMorePageEl.removeClass("hidden");
-  $(learnMoreName).text(rawData[3].name);
-  $(address).text(rawData[3].location.display_address.join(","));
-  $(rating).text(`${rawData[3].rating} ⭐`);
-  $(price).text(rawData[3].price);
-  $(`.custom-card-three`).attr(
-    "style",
-    `background-image: url(${rawData[3].image_url}); background-size: cover;`
-  );
-  $("#3rr").text("");
-  $(ratingOne).text("");
-  $(ratingTwo).text("");
-  $(ratingThree).text("");
 }
 
 function handleHomeForm() {
@@ -240,14 +203,14 @@ function fetchSearch() {
   fetch(searchUrl, options)
     .then(function (response) {
       if (!response.ok) {
-        alert("error caught");
+        $(inputAlert2).removeClass("hidden");
         return Promise.reject(new Error("Response is not okay"));
       }
       return response.json();
     })
     .then(function (data) {
       if (data.businesses.length < 4) {
-        alert("error caught");
+        $(inputAlert2).removeClass("hidden");
       } else {
         data1.push(data);
         localStorage.setItem("data", JSON.stringify(data1));
@@ -391,101 +354,73 @@ function fetchSearch() {
     });
 }
 
-function toResultPage() {
-  console.log("works");
-  handleHomeForm();
-}
-
-function BacktoHome() {
-  homePageEl.removeClass("hidden");
-  resultsPageEl.addClass("hidden");
-}
-
-function toLearnMorePage() {
+function historyPick1() {
   resultsPageEl.addClass("hidden");
   learnMorePageEl.removeClass("hidden");
-}
-function backToResults() {
-  resultsPageEl.removeClass("hidden");
-  learnMorePageEl.addClass("hidden");
-}
-
-function MapstoResults() {
-  resultsPageEl.removeClass("hidden");
-  mapPageEl.addClass("hidden");
-}
-
-function toMapsPageFromResults1() {
-  var restData = JSON.parse(localStorage.getItem(data1));
-  data1.push(restData);
-  resultsPageEl.addClass("hidden");
-  mapPageEl.removeClass("hidden");
-  $(restAddress).val(data1[0].businesses[0].location.display_address.join(","));
-}
-
-function toMapsPageFromResults2() {
-  var restData = JSON.parse(localStorage.getItem(data1));
-  data1.push(restData);
-  resultsPageEl.addClass("hidden");
-  mapPageEl.removeClass("hidden");
-  $(restAddress).val(data1[0].businesses[1].location.display_address.join(","));
-}
-
-function toMapsPageFromResults3() {
-  var restData = JSON.parse(localStorage.getItem(data1));
-  data1.push(restData);
-  resultsPageEl.addClass("hidden");
-  mapPageEl.removeClass("hidden");
-  $(restAddress).val(data1[0].businesses[2].location.display_address.join(","));
-}
-
-function toMapsPageFromResults4() {
-  var restData = JSON.parse(localStorage.getItem(data1));
-  data1.push(restData);
-  resultsPageEl.addClass("hidden");
-  mapPageEl.removeClass("hidden");
-  $(restAddress).val(data1[0].businesses[3].location.display_address.join(","));
-}
-
-function toMapsPageFromLearnMore(event) {
-  learnMorePageEl.addClass("hidden");
-  mapPageEl.removeClass("hidden");
-  restAddress.val(
-    $(event.target)
-      .siblings("div")
-      .children(".3-address")
-      .children("span")
-      .text()
+  $(learnMoreName).text(rawData[0].name);
+  $(address).text(rawData[0].location.display_address.join(","));
+  $(rating).text(`${rawData[0].rating} ⭐`);
+  $(price).text(rawData[0].price);
+  $(`.custom-card-three`).attr(
+    "style",
+    `background-image: url(${rawData[0].image_url}); background-size: cover;`
   );
+  $("#3rr").text("");
+  $(ratingOne).text("");
+  $(ratingTwo).text("");
+  $(ratingThree).text("");
 }
 
-$(resultBtn).on("click", toResultPage);
-$(closeAlertbtn).on("click", closeAlert);
-$(document).on("click", ".continue-btn-lm", toLearnMorePage);
+function historyPick2() {
+  resultsPageEl.addClass("hidden");
+  learnMorePageEl.removeClass("hidden");
+  $(learnMoreName).text(rawData[1].name);
+  $(address).text(rawData[1].location.display_address.join(","));
+  $(rating).text(`${rawData[1].rating} ⭐`);
+  $(price).text(rawData[1].price);
+  $(`.custom-card-three`).attr(
+    "style",
+    `background-image: url(${rawData[1].image_url}); background-size: cover;`
+  );
+  $("#3rr").text("");
+  $(ratingOne).text("");
+  $(ratingTwo).text("");
+  $(ratingThree).text("");
+}
 
-$(document).on("click", ".three-get-dir", toMapsPageFromLearnMore);
-$(resultGoBackBtn).on("click", BacktoHome);
-$(learnMoreBackBtn).on("click", backToResults);
-$(mapBackBtn).on("click", MapstoResults);
+function historyPick3() {
+  resultsPageEl.addClass("hidden");
+  learnMorePageEl.removeClass("hidden");
+  $(learnMoreName).text(rawData[2].name);
+  $(address).text(rawData[2].location.display_address.join(","));
+  $(rating).text(`${rawData[2].rating} ⭐`);
+  $(price).text(rawData[2].price);
+  $(`.custom-card-three`).attr(
+    "style",
+    `background-image: url(${rawData[2].image_url}); background-size: cover;`
+  );
+  $("#3rr").text("");
+  $(ratingOne).text("");
+  $(ratingTwo).text("");
+  $(ratingThree).text("");
+}
 
-$(document).on("click", "#history-btn0", historyPick1);
-$(document).on("click", "#history-btn1", historyPick2);
-$(document).on("click", "#history-btn2", historyPick3);
-$(document).on("click", "#history-btn3", historyPick4);
-
-$("#pm-1").on("click", toMapsPageFromResults1);
-$("#pm-2").on("click", toMapsPageFromResults2);
-$("#pm-3").on("click", toMapsPageFromResults3);
-$("#pm-4").on("click", toMapsPageFromResults4);
-
-L.mapquest.key = "4JE8n3QyoprYfpwIHorXiugDcOsYQNLv";
-var map;
-var directions;
-var routeActive = false;
-var startLocation;
-var endLocation;
-$("#show-route-btn").on("click", initializeMap);
-$("#clear-route-btn").on("click", clearRoute);
+function historyPick4() {
+  resultsPageEl.addClass("hidden");
+  learnMorePageEl.removeClass("hidden");
+  $(learnMoreName).text(rawData[3].name);
+  $(address).text(rawData[3].location.display_address.join(","));
+  $(rating).text(`${rawData[3].rating} ⭐`);
+  $(price).text(rawData[3].price);
+  $(`.custom-card-three`).attr(
+    "style",
+    `background-image: url(${rawData[3].image_url}); background-size: cover;`
+  );
+  $("#3rr").text("");
+  $(ratingOne).text("");
+  $(ratingTwo).text("");
+  $(ratingThree).text("");
+}
 
 function clearRoute() {
   $("#map").remove();
@@ -525,21 +460,26 @@ function initializeMap() {
             end: endLocation,
           });
         } else {
-          alert("Invalid address, please enter valid adresss");
+          $(inputAlert3).removeClass("hidden");
         }
       });
   }
 }
 
-// function reRoute() {
-//   startLocation = $(startAddress).val();
-//   endLocation = $(restAddress).val();
-//  if (routeActive) {
-//   directions.route({
-//     start: startLocation,
-//     end: endLocation,
-//   });
-//  } else {
-//   initializeMap();
-//  }
-// };
+$(resultBtn).on("click", toResultPage);
+$(closeAlertbtn).on("click", closeAlert);
+$(document).on("click", ".continue-btn-lm", toLearnMorePage);
+$(document).on("click", ".three-get-dir", toMapsPageFromLearnMore);
+$(resultGoBackBtn).on("click", BacktoHome);
+$(learnMoreBackBtn).on("click", backToResults);
+$(mapBackBtn).on("click", MapstoResults);
+$(document).on("click", "#history-btn0", historyPick1);
+$(document).on("click", "#history-btn1", historyPick2);
+$(document).on("click", "#history-btn2", historyPick3);
+$(document).on("click", "#history-btn3", historyPick4);
+$("#pm-1").on("click", toMapsPageFromResults1);
+$("#pm-2").on("click", toMapsPageFromResults2);
+$("#pm-3").on("click", toMapsPageFromResults3);
+$("#pm-4").on("click", toMapsPageFromResults4);
+$("#show-route-btn").on("click", initializeMap);
+$("#clear-route-btn").on("click", clearRoute);

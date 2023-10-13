@@ -1,8 +1,17 @@
 /* ----- home page -----*/
 
-.custom-message {
+.custom-message,
+.custom-message-2 {
   position: absolute;
   top: 5%;
+  z-index: 1;
+}
+
+.custom-message-3 {
+  position: absolute;
+  left: 40%;
+  top: 5%;
+  z-index: 1;
 }
 
 #home-img {
@@ -27,12 +36,7 @@
   width: 60%;
   margin-right: 15px;
   padding: 25px;
-  /* box-shadow: 5px; */
 }
-
-/* .custom-btn {
-  display: none;
-} */
 
 label.checkbox {
   padding: 5px;
@@ -223,7 +227,6 @@ label.checkbox {
 .custom-card-three {
   border-radius: 10px;
   box-shadow: 10px 10px 10px;
-  /* background-image: url(https://s3-media2.fl.yelpcdn.com/bphoto/XihZqv1Rdw1P5vuwCS66Kw/o.jpg); */
 }
 
 /*----- Map Page ----- */
