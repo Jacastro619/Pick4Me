@@ -32,7 +32,7 @@ Introducing our restaurant discovery app Pick4Me! This your one-stop solution fo
 
 ![Screenshot of result cards](./assets/images/Result%20card%20screenshot.JPG)
 
-## Features
+## Highlighted Features
 
 ## Learning Points
 
