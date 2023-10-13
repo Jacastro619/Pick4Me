@@ -4,9 +4,212 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pick4Me</title>
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.css"
+    />
     <link rel="stylesheet" href="./assets/css/style.css" />
   </head>
   <body>
-    <script src="./assets/js/script.js"></script>
-  </body>
+    <!-- -------------------Home page-------------------------------     -->
+    <div id="home-page" class="home-page">
+        <h1 id="home-img" class="app-name"><img src="./assets/images/logo.png"/></h1>
+        <div>
+          <img src="./assets/images/logo2.png" alt="Picture of the Application Logo" class="logoimg">
+        </div>
+        <article class="message custom-message hidden">
+          <div class="message-header">
+            <p>Invalid Inputs</p>
+            <button class="delete close-alert" aria-label="delete"></button>
+          </div>
+          <div class="message-body">
+            All inputs must be filled out appropiately
+          </div>
+        </article>
+        <article class="message custom-message-2 hidden">
+          <div class="message-header">
+            <p>Error</p>
+            <button class="delete close-alert" aria-label="delete"></button>
+          </div>
+          <div class="message-body">
+            Error was caught, please check to see if inputs are correct
+          </div>
+        </article>
+        <form id="form1" class="box one-form-box">
+          <div class="field">
+            <label class="label">Your Address:
+            <div class="control">
+              <input id="one-input-address" class="input one-input" name="one-input-address" type="text" placeholder="Enter your address">
+            </div>
+            </label>
+          </div>
+          <div class="field">
+            <label class="label">Max Search Radius
+            <div class="control">
+              <input id="one-input-radius" class="input one-input" name="one-input-radius" type="text" placeholder="enter mile radius">
+            </div>
+            </label>
+          </div>
+          <div class="field">
+            <label class="label">Food Category:
+            <div class="control">
+              <input id="one-input-food" class="input one-input" name="one-input-food" type="text" placeholder="What kind of food?">
+            </div>
+            </label>
+          </div>
+          <div id="home-msg"></div>
+          <div id="start-btn">
+          <button id="one-btn-results" class="button is-primary" type="button">Show me the Results</button>
+        </div>
+        </form>
+      </div>
+<!-- -------------------results page-------------------------------     -->
+<div class="results-page hidden">
+  <div>
+    <img src="./assets/images/logo2.png" alt="Picture of the Application Logo" class="logoimg">
+  </div>
+    <form>
+      <button id="result-go-back" class="button custom-result-btn" type="submit">Go Back</button>
+    </form>
+      <div id="pick-history">
+        <h1>1st Pick History</h1>
+      </div>
+    <div id="results-container">
+      <div id="results-content1">
+        <div class="card custom-card-0">
+          <div class="card-content card-1">
+            <div class="content">
+              <h2>This is your 1st pick!</h2>
+              <h1 id="pick0">Restaurant Name</h1>
+            </div>
+          </div>
+          <div class="continue-btns">
+            <button id="lm-1" class="button continue-btn-lm">Learn More</button>
+            <button class="button continue-btn-d" id="pm-1">Pick Me!</button>
+          </div>
+        </div>
+      </div>
+        <div id="results-content2">
+          <div class="card custom-card-1">
+            <div class="card-content custom-content">
+              <div class="content">
+                <h2>This is your 2nd pick!</h2>
+                <h1 id="pick1">Restaurant Name</h1>
+              </div>
+            </div>
+            <div class="continue-btns">
+              <button id="lm-2" class="button continue-btn-lm">Learn More</button>
+              <button class="button continue-btn-d" id="pm-2">Pick Me!</button>
+            </div>
+          </div>
+        </div>
+        <div id="results-content3">
+          <div class="card custom-card-2">
+            <div class="card-content custom-content">
+              <div class="content">
+                <h2>This is your 3rd pick!</h2>
+                <h1 id="pick2">Restaurant Name</h1>
+              </div>
+            </div>
+            <div class="continue-btns">
+              <button id="lm-3" class="button continue-btn-lm">Learn More</button>
+              <button class="button continue-btn-d" id="pm-3">Pick Me!</button>
+            </div>
+          </div>
+        </div>
+        <div id="results-content4">
+          <div class="card custom-card-3">
+            <div class="card-content custom-content">
+              <div class="content">
+                <h2>This is your 4th pick!</h2>
+                <h1 id="pick3">Restaurant Name</h1>
+              </div>
+            </div>
+            <div class="continue-btns">
+              <button id="lm-4" class="button continue-btn-lm">Learn More</button>
+              <button class="button continue-btn-d" id="pm-4">Pick Me!</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="learn-more hidden">
+      <div>
+        <img src="./assets/images/logo2.png" alt="Picture of the Application Logo" class="logoimg">
+      </div>
+      <button id="learn-more-back" class="button custom-result-btn">Go Back</button>
+      <div class="card m-6  custom-card-three">
+        <div class="card-content">
+          <h1 id="lmName">Restaurant Name:</h1>
+          <div id="image">
+            <div class="content">
+              <div class="info-container">
+                <h3 class="3-rating"><strong> Star Rating:</strong> <span id="stars"></span></h3>
+                <h3 class="3-address"><strong>Address: </strong> <span id="address"></span> </h3>
+                <h3 class="3-recent-rating"><strong id="3rr">Most Recent Star Rating:</strong></h3>
+                <h3 id="rating1"></h3>
+                <h3 id="rating2"></h3>
+                <h3 id="rating3"></h3>
+                <h3 class="3-price"><strong>Price Rating:</strong> <span id="price"></span></h3>
+              </div>
+              <button class="three-get-dir">Get Directions</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- -------------------Map page--------------------------------------     -->
+  <div class="map-page hidden">
+    <div>
+      <img src="./assets/images/logo2.png" alt="Picture of the Application Logo" class="logoimg">
+    </div>
+    <button id="map-back" class="button custom-result-btn">Go Back</button>
+    <article class="message custom-message-3 hidden">
+      <div class="message-header">
+        <p>Error</p>
+        <button class="delete close-alert" aria-label="delete"></button>
+      </div>
+      <div class="message-body">
+        Error was caught, please make sure starting address is correct
+      </div>
+    </article>
+    <div id="form-container">
+    <form class="box custom-box">
+      <div class="field">
+        <label class="label">Starting Address:
+        <div class="control">
+          <input class="input" id="start-address" type="text" placeholder="Enter your address here">
+        </div>
+      </label>
+      </div>
+    
+      <div class="field">
+        <label class="label">Restaurant Address:
+        <div class="control">
+          <input class="input" id="rest-address" type="text" readonly>
+        </div>
+        </label>
+      </div>
+    
+      <button class="button is-primary" id="show-route-btn" type="button">Show Route</button>
+      <button class="button is-primary" id="clear-route-btn" type="button">Clear Route</button>
+    </form>
+  </div>
+  <div id="map-container" >
+  </div>
+  </div>
+
+<!-- -------------------script.js-------------------------------------     -->
+<script src="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="./assets/js/script.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</body>
+
 </html>
