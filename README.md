@@ -16,9 +16,9 @@
 
 ## Description
 
-Introducing our restaurant discovery app Pick4Me! This your one-stop solution for finding the perfect dining experience. With this app, you can input an address, set the desired radius, and specify the type of cuisine you're craving. The app then performs a real-time search, curating a list of four restaurants that match your criteria. Each result provides key information at a glance, but the magic happens when you click on the "Learn More" button. This gives you access to in-depth details about the restaurant, including recent ratings, address, and price. And if you've found the place you want to try, simply hit the "Pick Me!" button, and you will be directed to the direction page where you enter your starting address. This will provide you a route from your current location or any address you choose. Enjoy the convenience of finding your new favorite dining spot and getting there hassle-free with our restaurant discovery app!
-
 [Visit the Deployed Site](https://jacastro619.github.io/Pick4Me/)
+
+Introducing our restaurant discovery app Pick4Me! This your one-stop solution for finding the perfect dining experience. With this app, you can input an address, set the desired radius, and specify the type of cuisine you're craving. The app then performs a real-time search, curating a list of four restaurants that match your criteria. Each result provides key information at a glance, but the magic happens when you click on the "Learn More" button. This gives you access to in-depth details about the restaurant, including recent ratings, address, and price. And if you've found the place you want to try, simply hit the "Pick Me!" button, and you will be directed to the direction page where you enter your starting address. This will provide you a route from your current location or any address you choose. Enjoy the convenience of finding your new favorite dining spot and getting there hassle-free with our restaurant discovery app!
 
 ## Usage
 
@@ -36,6 +36,18 @@ Introducing our restaurant discovery app Pick4Me! This your one-stop solution fo
 
 ## Learning Points
 
-## Author Info
+## Authors Info
+Jorge Castro
+- [Portfolio](https://jacastro619.github.io/my-portfolio/)
+- [LinkedIn](https://www.linkedin.com/in/jorge-castro-2a9545177/)
+- [GitHub](https://github.com/Jacastro619)
 
-## Credits
+Andy Zurek
+- [Portfolio](https://azurek17.github.io/zurek-portfolio/)
+- [LinkedIn](https://www.linkedin.com/in/andy-zurek-374bb9291/)
+- [GitHub](https://github.com/AZurek17)
+
+Ezekiel Jamolin
+- [Portfolio](https://ezekiel186.github.io/portfolio/)
+- [LinkedIn](https://www.linkedin.com/in/ezekiel-jamolin-747150291/)
+- [GitHub](https://github.com/Ezekiel186)
