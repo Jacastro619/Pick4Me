@@ -1,5 +1,7 @@
 # Pick4Me
 
+![Screenshot of the applicaiton](./assets/images/README-Screenshot.png)
+
 ## Technology Used
 
 | Technology Used     |                                                           Resource URL                                                           |
@@ -33,6 +35,32 @@ Introducing our restaurant discovery app Pick4Me! This your one-stop solution fo
 ![Screenshot of result cards](./assets/images/Result%20card%20screenshot.JPG)
 
 ## Highlighted Features
+
+**Restaurant Review Search**
+
+This application utilizes the Yelp API to get the best local content and user reviews.  The Yelp API allowed us to filter the searches and retrieve the business name, address, price, star rating, and the most recent star ratings.
+
+![Screenshot of Review Page](./assets/images/Feature-Review%20screenshot.png)
+
+**Interactive Map:**
+
+This application utilizes MapQuest API and intergrates with Leaflet.js. 
+
+MapQuest.js allows for interative maps, geocoding, directions and traffic. This allowed us to create a custom Route Page which displays to the user, a general route to take.
+
+![Screenshot of MapQuest interative map](./assets/images/Feature-Map%20screenshot.png)
+
+
+**1st Pick History:**
+ 
+ This application utilizes the users local Storage to save the 1st pick shown for each search initiated. It also does not duplicate a 1st pick result.  This allows the user to quickly select a previous search that was more fitting.
+ 
+ ![Screenshot of History buttons](./assets/images/Feature-History%20screenshot.png)
+
+ We used JavaScript to pull the  information from local storage and create the History display.
+
+ ![Screenshot of History saved to Local storage](./assets/images/Feature-LocalStorage%20screenshot.png)
+
 
 ## Learning Points
 
